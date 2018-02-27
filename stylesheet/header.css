@@ -1,0 +1,116 @@
+.logo{
+    /* background-image: url('../img/logocam.png');*/
+    font-size : 16px;
+    font-family: 'Jazz LET, fantasy';
+    color: white;
+    width: 77vw;
+} 
+
+.menuprincipal img{
+    width: 10%;
+    float:right;
+    margin-top: 3.2vh;
+}
+
+.menuprincipal .submenu{
+    background-color: #4286f4;
+}
+
+.menuprincipal a {
+    margin-left: 6vw;
+}
+
+.submenu li:hover a{
+    font-weight: bold;
+    color: #4286f4;
+}
+
+.menuprincipal .submenu li:hover{
+    background-color: white;   
+}
+
+
+
+.submenu{
+    display: none;
+    color:white;
+}
+
+
+nav li .submenu{
+    color:white;
+}
+
+nav li:hover .submenu{
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    padding: 0px;
+    z-index: 1000;
+}
+
+
+
+.submenu li{
+    /* border-bottom: 1px solid grey; */
+}
+
+.submenu li a {
+    padding: 15px 30px;
+    font-size: 13px;
+    color: white;
+    width: 270px;
+ 
+}
+
+nav{
+    width: 100vw;
+    background-color:#4286f4;
+    padding-left: 4%;
+}
+
+nav ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav ul::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+nav ul li{
+    float: left;
+    position: relative;
+    color: white;
+}
+
+nav ul li a{
+    padding: 20px 30px;
+    color: #FFF;
+}
+
+nav li{
+    list-style-type: none;
+    width: 19vw;
+}
+
+
+
+nav a{
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+
+
+
+body{
+    font-family: 'Source code pro', Calibri, serif;
+    margin: 0px;
+    padding: 0px;
+    background-color: grey;
+}

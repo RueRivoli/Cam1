@@ -1,0 +1,71 @@
+h1 {
+color: white;
+height: 6vh;
+}
+
+.field{
+    height: 13vh;
+}
+
+.pass{
+    height: 8vh;
+}
+
+#modalities{
+    width: 39vw;
+    height: 64vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#profile{
+    width: 80vw;
+    height: 79vh;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 3px;
+    background-color:#4286f4;
+    text-align: center;
+}
+
+#contener_profile{
+    margin:auto;
+    height: 80vh;
+    width: 100%;
+    padding-top: 20px;
+    background-color:grey;
+}
+
+input{
+    width: 69%;
+}
+
+span{
+    font-weight: normal;
+}
+
+.italique{
+    font-style: italic;
+    font-size: 12px;
+}
+
+#sub{
+    margin-left: 2vw;
+    height: 5vh;
+    border: none;
+    font-weight: bold;
+    margin: auto;
+        margin-left: auto;
+    margin-left: 8vw;
+    width: 11vw;
+}
+
+.red{
+    color:red;
+}
+
+
+footer{
+    height: 20vh;
+}

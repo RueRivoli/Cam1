@@ -1,0 +1,205 @@
+body{
+    background-color:#4286f4;
+}
+
+.sign-bar {
+    padding-top: 10px;
+    height: 23vh;
+    width: 100%;
+    background-color: #4286f4;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    display: flex;
+    color: white;
+    /* display: inline-block; */
+}
+
+.sign-bar img{
+    width: 91%;
+    height: 69%;
+    margin-left: 4vw;
+    margin-top: 5vh;
+}
+
+#welcome{
+    margin-left: 10vw;
+    font-size: 6vh;
+    margin-top: 14vh;
+    width: 53vw;
+}
+
+#log
+{
+    float: right;
+    width: 26vw;
+    font-size: 2.5vh;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color:#0f2851;
+}
+
+a{
+    
+    font-size: 2vh;
+    color:#0f2851;
+    text-decoration: none;
+}
+
+#link{
+    width: 12vw;
+}
+
+#enter{
+    float: right;
+    margin-top: -11vh;
+    margin-right: 6vw;
+    width: 5vw;
+    height: 3vh;
+    background-color: #4286f4;
+    border-radius: 1vh;
+    border-width: 0.2vh;
+    color: white;
+    font-size: 1.5vh;
+}
+
+#enter:hover{
+    float: right;
+    margin-top: -11vh;
+    margin-right: 6vw;
+    width: 5vw;
+    /* border-radius: 6px; */
+    /* border-width: 2px; */
+    background-color: red;
+}
+
+input{
+    width: 10vw;
+    height: 1.5vh;
+}
+.content{
+    display: flex;
+    /* background-color:yellow; */
+    height: 77vh;
+    width: 100%;
+    /* background-attachment: fixed; */
+    background-size: 100%;
+    background-image: url('../img/filtre.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* -webkit-filter: grayscale(100%);
+    filter: grayscale(100%); */
+
+    /* filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px); */
+}
+
+.create_account{
+    /*LA*/
+    width: 100vw;
+    /*FIN*/
+    background-image: url('../img/curtain.jpg');;
+    opacity: 0.7;
+    margin: -5px;
+    /* background-image: url(../images/curtain-mobile.png); */
+    background-position: right top!important;
+    /*LA*/
+    background-repeat: no-repeat;
+    background-size: 100vw 79vh;
+     /*FIN*/
+}
+
+#inscription{
+    margin-left: 10vw;
+    height: 77vh;
+}
+
+#inscription img{
+    margin-left: 4vw;
+    height: 44vh;
+}
+
+#accroche h3{
+    padding-left: 29px;
+    color: #A2A7A8;
+}
+
+#accroche{
+    /*LA*/
+    height: 31vh;
+    margin-top: -61px;
+    margin-left: 9vw;
+     /*FIN*/
+}
+
+#abonne input{
+    width: 11vw;
+    /* border: none; */
+    height: 6vh;
+    background-color:red;
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 6px;
+    border-width: 2px;
+    color:white;
+    margin-left: -3vw;
+    font-size: 1.8vh;
+}
+
+#abonne{
+    width: 20vh;
+    margin-top: 20px;
+    margin-left: 108px;
+}
+#abonne input:hover{
+    background-color:#4286f4;
+}
+
+
+footer{
+    height: 20vh;
+    border-top: 1px solid white;
+    text-align: center;
+    padding-top: 10px;
+}
+
+@media only screen and (max-width:1000px) {
+    #enter{
+       font-size: 1.0vh;
+       margin-right: 1vw;
+    }
+   input{
+       width: 14vh;
+   }
+}
+
+@media only screen and (max-width:750px) {
+    #enter{
+       font-size: 1.0vh;
+       margin-top: -15vh;
+       margin-right: 31vw;
+    }
+   input{
+       width: 20vh;
+   }
+   #abonne input{
+        font-size: 13px;
+        width: 94px;
+   }
+   .create_account {
+    width: 100vw;
+    background-image: none;
+    background-color:white;
+    opacity: 0.7;
+    }
+    a {
+        font-size: 12px;
+    }
+
+    #welcome{
+        font-size: 3vh;
+    }
+}

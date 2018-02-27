@@ -1,0 +1,138 @@
+.none{
+    display: none;
+}
+
+/* .pushright{
+    margin-left: 6vw;
+} */
+
+
+#monacologo{
+    width: 54%;
+    height: 95%;
+}
+
+#monacoshirt{
+    width: 63%;
+    height: 95%;
+}
+
+#scarlett{
+    width: 67%;
+    height: 110%;
+}
+
+#mrbean{
+    height: 97%;
+    width: 126%;
+    padding: 1vw;
+}
+
+/* #lion{
+    width: 16vw;
+    height: 21vh;
+} */
+
+#dolphin{
+    width: 14vw;
+    height: 16vh;
+}
+
+.preview_right{
+    width: 18%;
+    height: 17%;
+    position: absolute;
+    display: block;
+    top: 13%;
+    left: 51%;
+}
+
+.preview_center{
+    width: 18%;
+    height: 17%;
+    position: absolute;
+    display: block;
+    top: 13%;
+    left: 51%;
+}
+
+.preview_cadre{
+    width: 100%;
+    height: 51%;
+    position: absolute;
+    display: block;
+    top: 0%;
+    left: 0%;
+}
+
+.preview_cadre2{
+    width: 46%;
+    height: 51%;
+    position: absolute;
+    display: block;
+    top: 10%;
+    left: 28%;
+}
+
+.preview_logo{
+    width: 9%;
+    height: 20%;
+    position: absolute;
+    display: block;
+    top: 26%;
+    left: 31%;
+}
+
+.preview_lion{
+    width: 13%;
+    height: 20%;
+    position: absolute;
+    display: block;
+    top: 30%;
+    left: 29%;
+}
+
+.preview_scarlett{
+    width: 18%;
+    height: 35%;
+    position: absolute;
+    display: block;
+    top: 22%;
+    left: 53%;
+}
+
+.preview_kungfu{
+    width: 16%;
+    height: 20%;
+    position: absolute;
+    display: block;
+    top: 34%;
+    left: 31%;
+}
+
+.preview_shirt{
+    width: 29%;
+    height: 59%;
+    position: absolute;
+    display: block;
+    top: 26%;
+    left: 35%;
+}
+
+.preview_neck{
+    width: 18%;
+    height: 17%;
+    position: absolute;
+    display: block;
+    top: 32%;
+    left: 38%;
+}
+
+.preview_mrbean{
+    width: 35%;
+    height: 29%;
+    position: absolute;
+    display: block;
+    top: 28.6%;
+    left: 29.5%;
+}

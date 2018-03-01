@@ -3,13 +3,13 @@
     font-size : 16px;
     font-family: 'Jazz LET, fantasy';
     color: white;
-    width: 77vw;
+    width: 73vw;
 } 
 
 .menuprincipal img{
-    width: 10%;
-    float:right;
-    margin-top: 3.2vh;
+    width: 11%;
+    height: 2vw;
+    margin-top: 1vh;
 }
 
 .menuprincipal .submenu{
@@ -85,6 +85,8 @@ nav ul li{
     float: left;
     position: relative;
     color: white;
+    display: flex;
+    flex-direction: row;
 }
 
 nav ul li a{

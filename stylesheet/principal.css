@@ -116,19 +116,18 @@ nav li:hover .submenu{
 #container{
     margin-left: 4vw;
     margin-right: 4vw;
-    margin-top: 2vh;
- 
 }
 
 #selector{
-    height: 86vh;
+    height: 76vh;
     width: 19vw;
     display: inline-block;
     vertical-align: top;
-    background-color:#4286f4;
+    /* background-color: #4286f4; */
     overflow: scroll;
-    border: 1px solid white;
+    border: 1px solid green;
     border-radius: 5px;
+    margin-top: 5vh;
 }
 
 #cam{
@@ -138,6 +137,7 @@ nav li:hover .submenu{
     width: 41vw;
     margin-top: 3vh;
     margin-left: 3vw;
+    margin-top: 12vh;
 }
 
 #video{
@@ -146,17 +146,23 @@ nav li:hover .submenu{
 }
 
 #pic_view{
-    height: 86vh;
+    height: 76vh;
     width: 24vw;
     display: inline-block;
     vertical-align: top;
-    background-color: #4286f4;
+    /* background-color: #4286f4; */
     overflow: scroll;
-    border: 1px solid white;
+    border: 1px solid red;
     border-radius: 4px;
     margin-left: 3vw;
+    margin-top: 5vh;
 }
 
+.content{
+    background-image: url('../img/Wall1.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
 .filter{
     height: 19vh;
     display:block;
@@ -239,7 +245,7 @@ button{
 .upload{
     height: 9vh;
     width: 41vw;
-    border: 2px solid grey;
+    /* border: 2px solid grey; */
     border-radius: 20px;
     margin-top: 6vh;
 }

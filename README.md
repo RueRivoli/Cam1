@@ -21,10 +21,15 @@ Main page
 
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture1.png)
 
+Create your account
+
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture2.png)
 
+Modify your profile
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture3.png)
 
+Gallery 
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture4.png)
 
+Take a picture
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture5.png)

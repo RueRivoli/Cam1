@@ -16,6 +16,7 @@ une liste d’images superposables (des filtres, des cadres ou objets), prendre 
 et admirer le résultat d’un montage digne de James Cameron.
 
 -------------------------------------------------------------------------------------------------------------------------
+Tech : Html, CSS, Javascript / PHP, mysql
 
 Main page
 

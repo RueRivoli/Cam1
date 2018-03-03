@@ -20,3 +20,11 @@ et admirer le résultat d’un montage digne de James Cameron.
 Main page
 
 ![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture1.png)
+
+![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture2.png)
+
+![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture3.png)
+
+![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture4.png)
+
+![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture5.png)

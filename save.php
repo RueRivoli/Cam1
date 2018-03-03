@@ -88,8 +88,8 @@ function savephoto()
 {
     $data = (isset($_POST["data"])) ? $_POST["data"] : NULL;
     $fil = (isset($_SESSION["filter"])) ? $_SESSION["filter"] : "none";
-   
-    // $filt = imagecreatefromjpg('img/bond.jpg');
+
+
     if (!isset($data))
         $data = $_SESSION['import'];
     if ($data && $data !== '')
@@ -104,8 +104,9 @@ function savephoto()
         $photo_cam = imagecreatefromstring($data);
         if ($fil !== 'none')
             createmontage($photo_cam, $fil);
-        else
+            else
         {
+
             $p = 'photos/'. $uiid . '.png';
             insertIntoDatabase($p);
             file_put_contents($p, $data);
@@ -119,5 +120,5 @@ function savephoto()
 
 if (isset($fil) && $fil != "none")
     savephoto();
-
 ?>
+

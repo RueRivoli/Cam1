@@ -8,7 +8,7 @@ body{
     /* font-family: 'Source code pro', Calibri, serif; */
     margin: 0px;
     padding: 0px;
-    background-color: grey;
+    /* background-color: grey; */
 }
 
 
@@ -38,13 +38,13 @@ body{
     margin: auto;
     padding-top: 20px;
     width: 100%;
-    background:linear-gradient(to bottom, #4286F4 0%, white 100%);
+    background: linear-gradient(to right, white 0%, #4286F4 100%);
     text-align: center;
-    height: 104vh;
+    height: 116vh;
 }
 
 #links{
-    margin-left: 12vw;
+    margin-left: 22vw;
     width: 52%;
     display: flexbox;
     display: flex;
@@ -87,18 +87,7 @@ body{
     height: 100%;
 }
 
-#square{
-    height: 70vh;
-    width: 43vw;
-    background-color: purple;
-    margin: auto;
-    margin-top: auto;
-    margin-top: 19px;
-}
 
-#pic{
-    background-color: grey;
-}
 
 .entete2{
     height: 33px;

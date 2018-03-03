@@ -202,18 +202,19 @@ input{
     margin: 0px;
     height: 3vh;
     width: 100%;
-    background-color: purple;
+    /* background-color: purple; */
     font-size: 1vh;
+    opacity: 0.5;
     font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
 #sub_upl {
     border: none;
     margin: 0px;
-    height: 6vh;
+    height: 3vh;
     font-size: 1vh;
     font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-    background-color: red;
+    background-color: skyblue;;
 }
 
 input:hover{
@@ -268,3 +269,21 @@ footer{
 .valided{
     background-color:yellow;
 }
+
+@media only screen and (min-width:1800px) {
+    #selector {
+        height: 76vh;
+        width: 15vw;
+        display: inline-block;
+        vertical-align: top;
+        /* background-color: #4286f4; */
+        overflow: scroll;
+        border: 1px solid green;
+        border-radius: 5px;
+        margin-top: 5vh;
+   }
+   #pic_view{
+    height: 77vh;
+    width: 20vw;
+}
+ }

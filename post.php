@@ -42,6 +42,7 @@ catch(PDOException $e) {
         <meta charset="utf-8">
         <meta name="description" content="165c. uniques">
         <link rel="stylesheet" type="text/css" href="stylesheet/gallery.css" media="all"/>
+        <link rel="stylesheet" type="text/css" href="stylesheet/post.css" media="all"/>
 </head>
 
 <body>
@@ -71,9 +72,14 @@ include "functions/header.php";
                 echo "<img src=\"img/like.png\"></a>";
         ?>
         </div>
-            <p id="nb_likes"><?php echo $nb_likes?></p>
+        <?php
+                    if (if_user_like($post_id, $_SESSION['login']) === 1)
+                        echo "<p id=\"nb_likes_red\">";
+                    else
+                        echo "<p id=\"nb_likes\">";
+            echo $nb_likes?></p>
             <div id="heart">
-                <img src="img/mess2.png">
+                <img src="img/message.png">
             </div>
             <p id="nb_coms"><?php echo $nb_comments?></p>
             <div id="trash">
@@ -110,9 +116,11 @@ include "functions/header.php";
                 <div id="send">
                 <input id="sub" type="submit" value="Publish">
                 </div>
-            <input id="valuecom" type="text" name="text" placeholder="Ajoutez un commentaire...">
+            <input id="valuecom" type="text" name="text" placeholder="Add a comment...">
             </div>
         </form>
+</div>
+</div>
 </div>
 <footer>
 @fgallois 2018

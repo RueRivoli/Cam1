@@ -80,7 +80,7 @@ function send_mail_for_change($p)
             Pour vous activer votre compte et vous reconnecter, 
             cliquez sur le lien ci-dessus ou copier/coller les dans votre navigateur internet.
 
-            http://localhost:8888/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+            http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
     
             ----------------------------------------------------------------------------------------
             Ceci est un mail automatique, Merci de ne pas y répondre.';

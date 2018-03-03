@@ -59,33 +59,19 @@ function  getDataURL() {
 
           /*if (document.getElementById('filter1').checked)
             filter = "dolphin";*/
-            
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-              alert(xhr.responseText);
+          {
+            // if (xhr.readyState == 1 && (xhr.status == 200 || xhr.status == 0)) {
+            // {
+               //alert(xhr.responseText);
+            }
           }
         }
         xhr.open("POST", "save.php", false);
-        
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send('data='+ canvas.toDataURL('image/png'));
-
-        /*Ajout de l'image dans la rubrique*/
-        // var pv = document.getElementById('pic_view');
-        // var newCadrage = document.createElement('div');
-        // newCadrage.className = 'cadrage';
-        // newCadrage.id = xhr.responseText;
-        // pv.insertBefore(newCadrage, pv.firstChild);
-        // var newImg = document.createElement('img');
-        // newImg.className = 'moovable_image';
-        // newImg.src  = xhr.responseText;
-        // //newImg.src  = canvas.toDataURL('image/png');
-        // //newImg.src = data;
-        // newImg.title = xhr.responseText;
-        // document.getElementById(xhr.responseText).appendChild(newImg);
-
-
 
         var pv = document.getElementById('pic_view');
 

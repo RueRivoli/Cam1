@@ -40,16 +40,21 @@ function send_mail($p)
     $dest = $p['email'];
     $subject = "Activer votre compte";
     $entete = "From: inscription@camagru.com";
-    $message = 'Bienvenue sur Camagru,
+    $message = 'Bienvenu sur Camagru,
     
    Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
    ou copier/coller dans votre navigateur internet.
 
-   http://localhost:8080/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+   http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
     
    ----------------------------------------------------------------------------------------
    Ceci est un mail automatique, Merci de ne pas y répondre.';
-    mail($dest, $subject, $message, $entete) ;
+    try{
+        $test = mail($dest, $subject, $message, $entete);
+    }
+    catch(PDOException $e) {
+        echo "Pb on sending mails! The mistake is : ".$e;
+    }
     $_SESSION['error'] = "Un email vous a ete envoyé";
     header('Location: ../index.php');
     exit;

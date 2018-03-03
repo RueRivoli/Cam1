@@ -51,8 +51,7 @@ function warn_for_comment()
         A bientot pour de nouvelles aventures.\n
         ----------------------------------------------------------------------------------------
         Ceci est un mail automatique, Merci de ne pas y répondre";
-
-        mail($dest, $subject, $message, $entete);
+        $test = mail($dest, $subject, $message, $entete);
         }
         catch(PDOException $e) {
             echo "Impossible to send the mail : ".$e;

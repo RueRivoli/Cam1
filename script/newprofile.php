@@ -123,7 +123,7 @@ function send_mail_reactivate($log, $mail)
    Pour activer votre nouvelle adresse mail, veuillez cliquer sur le lien ci-dessous
    ou copier/coller dans votre navigateur internet.
 
-   http://localhost:8080/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+   http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
     
    ----------------------------------------------------------------------------------------
    Ceci est un mail automatique, Merci de ne pas y répondre.';

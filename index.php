@@ -1,8 +1,8 @@
 <?php
 session_start();
 $_SESSION['login'] = "";
-// echo $_SESSION['error'];
 include 'config/setup.php';
+
 ?>
 
 <!DOCTYPE HTML>

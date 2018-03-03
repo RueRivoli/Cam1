@@ -68,6 +68,7 @@ nav{
     width: 100vw;
     background-color:#4286f4;
     padding-left: 4%;
+    border-bottom: 1px solid gold;
 }
 
 nav ul{

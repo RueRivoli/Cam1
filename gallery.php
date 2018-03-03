@@ -98,12 +98,6 @@ catch(PDOException $e) {
     echo "Impossible to display the post! The mistake is : ".$e;
 }
 ?>
-
-<?php 
-    $i = 0;
-?>
-
-</div>
 <div id="links">
 <?php 
 $i = 1;
@@ -113,6 +107,9 @@ while ($i < $nb_pages)
     $i++;
 }
 ?>
+
+</div>
+
 
 </div>
 <footer>

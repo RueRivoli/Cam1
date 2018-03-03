@@ -1,5 +1,7 @@
 <?php 
+
 session_start();
+
 include "../functions/account.php";
 
 if ($_POST['sub'] === 'Submit')

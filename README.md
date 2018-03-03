@@ -19,4 +19,4 @@ et admirer le résultat d’un montage digne de James Cameron.
 
 Main page
 
-[[https://github.com/RueRivoli/Camagru/master/ressources/captures/capture1.png|alt=octocat]]
+![alt text](https://raw.githubusercontent.com/RueRivoli/Camagru/master/ressources/captures/capture1.png)

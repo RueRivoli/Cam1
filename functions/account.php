@@ -37,6 +37,11 @@ function send_mail($p)
         echo "Impossible to update the key! The mistake is : ".$e;
     }
 
+
+    $link = "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    $link = str_replace("/create_account.php", "", $link);
+    $link = $link . '/activation.php?log='.urlencode($log).'&cle='.urlencode($code);
+  
     $dest = $p['email'];
     $subject = "Activer votre compte";
     $entete = "From: inscription@camagru.com";
@@ -45,7 +50,7 @@ function send_mail($p)
    Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
    ou copier/coller dans votre navigateur internet.
 
-   http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+   $link;
     
    ----------------------------------------------------------------------------------------
    Ceci est un mail automatique, Merci de ne pas y répondre.';
@@ -61,8 +66,9 @@ function send_mail($p)
 }
 
 function create_account($p, $pw){
+
     include "../config/database.php";
-    include "initdb.php";
+    include "../functions/initdb.php";
     try {
         
         $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity) VALUES (:name, :value, :pswd, :cle, :activi)");

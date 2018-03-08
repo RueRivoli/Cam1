@@ -116,14 +116,19 @@ function send_mail_reactivate($log, $mail)
         echo "Impossible to update the key of login".$e;
 }
     $dest = $mail;
+
+    $link = "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    $link = str_replace("/script/newprofile.php", "", $link);
+    $link = $link . '/activation.php?log='.urlencode($log).'&cle='.urlencode($code);
+     
     $subject = "Activer votre nouvelle adresse-mail" ;
     $entete = "From: inscription@camagru.com" ;
     $message = 'Bienvenue sur Camagru,
     
    Pour activer votre nouvelle adresse mail, veuillez cliquer sur le lien ci-dessous
-   ou copier/coller dans votre navigateur internet.
+   ou copier/coller dans votre navigateur internet.'
 
-   http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+   .$link.'
     
    ----------------------------------------------------------------------------------------
    Ceci est un mail automatique, Merci de ne pas y répondre.';

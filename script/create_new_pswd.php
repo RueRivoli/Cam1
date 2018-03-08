@@ -70,17 +70,21 @@ function send_mail_for_change($p)
             echo "Can't manage to update password, activity or key! The mistake is : ".$e;
         }
 
+            $link = "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+            $link = str_replace("/script/create_new_pswd.php", "", $link);
+             $link = $link . '/activation.php?log='.urlencode($log).'&cle='.urlencode($code);
+            
             $subject = "Votre nouveau mot de passe" ;
-            $entete = "From: inscription@camagru.com" ;
-            $message = 'Bonjour'. $_SESSION['login'].',
+            $entete = "From: inscription@camagru.com";
+            $message = 'Bonjour '. $log.',
     
             Il semblerait que vous ayez oublié votre mot de passe.
 
             Votre nouveau mot de passe est : '.$rand.' Vous pourrez le modifier une fois connecté.
             Pour vous activer votre compte et vous reconnecter, 
-            cliquez sur le lien ci-dessus ou copier/coller les dans votre navigateur internet.
+            cliquez sur le lien ci-dessus ou copier/coller les dans votre navigateur internet.'
 
-            http://localhost:8081/Camagru2/activation.php?log='.urlencode($log).'&cle='.urlencode($code).'
+            .$link.'
     
             ----------------------------------------------------------------------------------------
             Ceci est un mail automatique, Merci de ne pas y répondre.';

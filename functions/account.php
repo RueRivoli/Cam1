@@ -39,7 +39,7 @@ function send_mail($p)
 
 
     $link = "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-    $link = str_replace("/create_account.php", "", $link);
+    $link = str_replace("/script/new_account.php", "", $link);
     $link = $link . '/activation.php?log='.urlencode($log).'&cle='.urlencode($code);
   
     $dest = $p['email'];
@@ -50,7 +50,7 @@ function send_mail($p)
    Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
    ou copier/coller dans votre navigateur internet.
 
-   $link;
+   '.$link.'
     
    ----------------------------------------------------------------------------------------
    Ceci est un mail automatique, Merci de ne pas y répondre.';

@@ -44,18 +44,18 @@ function warn_for_comment()
         $dest = $row2['email'];
         $message = "Salut c'est Camagru,
     
-        Votre post a recu un commentaire !
+        Votre post a reçu un commentaire !
 
         En effet, "
-        .$login." a reagi a votre photo : ".htmlspecialchars($_POST['text'])."\n"."
-        A bientot pour de nouvelles aventures.\n
+        .$login." a réagi à votre photo : ".htmlspecialchars($_POST['text'])."\n"."
+        A bientôt pour de nouvelles aventures.\n
         ----------------------------------------------------------------------------------------
         Ceci est un mail automatique, Merci de ne pas y répondre";
-        $test = mail($dest, $subject, $message, $entete);
-        }
-        catch(PDOException $e) {
-            echo "Impossible to send the mail : ".$e;
-        }
+         $test = mail($dest, $subject, $message, $entete);
+    }
+    catch(PDOException $e) {
+        echo "Impossible to send the mail : ".$e;
+    }
 }
 
 insertCom();

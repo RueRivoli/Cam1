@@ -39,7 +39,7 @@ try {
     $nb_pages = $nb_pic / 12;
     if ($nb_pages % 12 > 0)
         $nb_pages++;
-    $offset = ($index - 1) * 12 + 1;
+    $offset = ($index - 1) * 12;
     $sql = $db->prepare("SELECT id, login, post_id, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post ORDER BY id DESC LIMIT 12 OFFSET :offset");
     $sql->bindValue(':offset', $offset, PDO::PARAM_INT);
     $sql->execute();

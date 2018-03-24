@@ -32,26 +32,38 @@ function warn_for_comment()
     $entete = "From: inscription@camagru.com";
     include "../config/database.php";
     include "../functions/initdb.php";
+
     try {
+
         $postid = $_SESSION['post'];
         $st = $db->prepare("SELECT login FROM post where post_id = ?");
         $st->execute(array($postid));
         $row = $st->fetch();
         $dest_user = $row['login'];
-        $st = $db->prepare("SELECT email FROM users where login = ?");
-        $st->execute(array($dest_user));
-        $row2 = $st->fetch();
-        $dest = $row2['email'];
-        $message = "Salut c'est Camagru,
-    
-        Votre post a reçu un commentaire !
 
-        En effet, "
-        .$login." a réagi à votre photo : ".htmlspecialchars($_POST['text'])."\n"."
-        A bientôt pour de nouvelles aventures.\n
-        ----------------------------------------------------------------------------------------
-        Ceci est un mail automatique, Merci de ne pas y répondre";
-         $test = mail($dest, $subject, $message, $entete);
+        $st = $db->prepare("SELECT notif FROM users WHERE login = :login ");
+        $st->execute(array(':login' => $dest_user));
+        $row = $st->fetch();
+        $notif = $row['notif']; 
+
+        
+        if ($notif == 1)
+        {
+            $st = $db->prepare("SELECT email FROM users where login = ?");
+            $st->execute(array($dest_user));
+            $row2 = $st->fetch();
+            $dest = $row2['email'];
+            $message = "Salut c'est Camagru,
+    
+            Votre post a reçu un commentaire !
+
+            En effet, "
+            .$login." a réagi à votre photo : ".htmlspecialchars($_POST['text'])."\n"."
+            A bientôt pour de nouvelles aventures.\n
+            ----------------------------------------------------------------------------------------
+            Ceci est un mail automatique, Merci de ne pas y répondre";
+            $test = mail($dest, $subject, $message, $entete);
+        }
     }
     catch(PDOException $e) {
         echo "Impossible to send the mail : ".$e;

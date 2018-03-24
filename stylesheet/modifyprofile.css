@@ -51,6 +51,11 @@ span{
     font-size: 12px;
 }
 
+.field .check{
+    width: 4%;
+}
+
+
 #sub{
     margin-left: 2vw;
     height: 5vh;

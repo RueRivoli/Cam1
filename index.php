@@ -24,7 +24,8 @@ include 'config/setup.php';
     <form method="post" action="script/connexion.php" id="log">
     Login<br/><input type="text" name="pseudo" /><br/><br/>
     Password<br/><input type="password" name="pswd" /><br/>
-    <div id="link"><a href="forbiddenpswd.php" >Forgot your password?</a><br/></div>
+    <!-- <div id="link"><a href="forbiddenpswd.php" >Forgot your password?</a><br/></div> -->
+    <div id="link"><input type="submit" name="forget" value="Forgot your password?"></a><br/></div> 
     <input type="submit" name="logIN" value="log in" id="enter"/>
     </form>
 </div>

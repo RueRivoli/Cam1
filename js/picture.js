@@ -30,16 +30,16 @@ function  getDataURL() {
     });
 
 
-      video.addEventListener('canplay', function(ev){
-        if (!streaming) {
-          height = video.videoHeight / (video.videoWidth/width);
-          video.setAttribute('width', width);
-          video.setAttribute('height', height);
-          canvas.setAttribute('width', width);
-          canvas.setAttribute('height', height);
-          streaming = true;
-        }
-      }, false);
+      // video.addEventListener('canplay', function(ev){
+      //   if (!streaming) {
+      //     height = video.videoHeight / (video.videoWidth/width);
+      //     video.setAttribute('width', width);
+      //     video.setAttribute('height', height);
+      //     canvas.setAttribute('width', width);
+      //     canvas.setAttribute('height', height);
+      //     streaming = true;
+      //   }
+      // }, false);
      
       function takepicture() {
           canvas.width = width;

@@ -1,6 +1,11 @@
 <?php
 if (!isset($_SESSION))
 session_start();
+if ($_GET['pseudo'] === '')
+{
+    header('Location: index.php');
+    exit;
+} 
 ?>
 
 <!DOCTYPE HTML>
@@ -21,7 +26,7 @@ session_start();
 </div>
 
 <div class="content">
-<form method="post" action="script/create_new_pswd.php" class="create_account">
+<form method="post" action="script/create_new_pswd.php?login=".$_GET['pseudo'] class="create_account">
 <div id= "inscription">
     <img src="img/logo.png"  alt="homelogo">
     <div id = "accroche"><br/><br/>

@@ -1,6 +1,5 @@
 <?php 
 session_start();
-
 function activ_user()
 {
     include '../config/database.php';
@@ -21,8 +20,12 @@ function activ_user()
         return FALSE;
 }
 
-
-if ($_POST['logIN'] === 'log in')
+if ($_POST['forget'] === 'Forgot your password?')
+{
+    header('Location: ./create_new_pswd.php?login='.$_POST['pseudo']);
+    exit; 
+}
+else if ($_POST['logIN'] === 'log in')
 {
     include '../config/database.php';
     include "../functions/initdb.php";
@@ -31,9 +34,15 @@ if ($_POST['logIN'] === 'log in')
         $st = $db->prepare("SELECT pswd FROM users WHERE login = :login");
         
         if ($st->execute(array(':login' => $_POST['pseudo'])) && $row = $st->fetch())
-        {
-            if (activ_user()  && $row['pswd'] == $psd)
+        {   
+            // echo $_POST['pseudo']; 
+            // echo "PSD -----          ".$psd."\n";
+            // echo "DB -----          ".$row['pswd']."\n";
+            
+            if (activ_user() && $row['pswd'] === $psd)
             {
+                // echo "rentre";
+                // die;
                 $_SESSION['login'] = htmlspecialchars($_POST['pseudo']);
                 header('Location: ../principal.php');
                 exit;

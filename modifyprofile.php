@@ -58,6 +58,13 @@ include "functions/header.php";
                 <input type="text" name="pseudo"><br>
             </div>
             <div class="field">
+            <p>Notifications :</p>
+                <input class = "check" type="radio" name="Notif" value="Yes" checked>
+                <label for="Yes">Oui aux notifications de commentaires</label><br>
+                <input class = "check" type="radio" name="Notif" value="No">
+                <label for="No">Non aux notifs</label><br> 
+            </div>
+            <div class="field">
                 <span>Email: </span><br>
                 <span class="italique">Choose a new email </span><br>
                 <input type="text" name="email" >

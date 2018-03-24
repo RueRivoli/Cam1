@@ -71,17 +71,19 @@ function create_account($p, $pw){
     include "../functions/initdb.php";
     try {
         
-        $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity) VALUES (:name, :value, :pswd, :cle, :activi)");
+        $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity, notif) VALUES (:name, :value, :pswd, :cle, :activi, :notif)");
         $a->bindParam(':name', $name);
         $a->bindParam(':value', $value);
         $a->bindParam(':pswd', $pd);
         $a->bindParam(':cle', $cle);
         $a->bindParam(':activi', $activi);
+        $a->bindParam(':notif', $not);
         $name = $p['uname'];
         $value = $p['email'];
         $pd = $pw;
         $cle = "";
         $activi = 0;
+        $not = 1;
        
         $a->execute();
         send_mail($_POST);

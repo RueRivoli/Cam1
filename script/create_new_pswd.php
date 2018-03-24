@@ -20,49 +20,49 @@ function genere_password($size)
 }
 
 
-function send_mail_for_change($p)
+function send_mail_for_change($login)
 {
     include "../config/database.php";
     include "../functions/initdb.php";
 
     $code = hash("whirlpool", rand());
-    $email = $p['email'];
-
-    /*Find the login*/
+    /*Find the id*/
     try{
-        $st = $db->prepare("SELECT login FROM users WHERE email = :email ");
-        if($st->execute(array(':email' => $email)) && $row = $st->fetch())
-            $log = $row['login'];
+        $st = $db->prepare("SELECT id, email FROM users WHERE login = :log ");
+        if($st->execute(array(':log' => $login)) && $row = $st->fetch())
+        {
+            $id = $row['id'];
+            $email = $row['email']; 
+        }
     }
     catch(PDOException $e) {
         echo "Can't manage to select login! The mistake is : ".$e;
     }
-      
-    if ($log)
+    if ($id && $email)
     {
         
         $rand = genere_password(8);
         
         try{
             /*Update password*/
-            $st = $db->prepare("UPDATE users SET pswd = :new_psd WHERE login = :login ");
+            $st = $db->prepare("UPDATE users SET pswd = :new_psd WHERE id = :id ");
             $st->bindParam(':new_psd', $new_pswd);
-            $st->bindParam(':login', $log);
+            $st->bindParam(':id', $id);
             $new_pswd = hash("whirlpool", $rand);
             $st->execute();
     
             /*Update key of activity*/
-            $st = $db->prepare("UPDATE users SET cle = :new_cle WHERE login = :login");
+            $st = $db->prepare("UPDATE users SET cle = :new_cle WHERE id = :id");
             $st->bindParam(':new_cle', $new_cle);
-            $st->bindParam(':login', $log);
+            $st->bindParam(':id', $id);
             $new_cle = $code;
             $st->execute();
         
      
             /*Update activity of the user*/
-            $st = $db->prepare("UPDATE users SET activity = :new_acti WHERE login = :login");
+            $st = $db->prepare("UPDATE users SET activity = :new_acti WHERE id = :id");
             $st->bindParam(':new_acti', $new_acti);
-            $st->bindParam(':login', $log);
+            $st->bindParam(':id', $id);
             $new_acti = 0;
             $st->execute();
         }
@@ -72,11 +72,11 @@ function send_mail_for_change($p)
 
             $link = "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
             $link = str_replace("/script/create_new_pswd.php", "", $link);
-             $link = $link . '/activation.php?log='.urlencode($log).'&cle='.urlencode($code);
+             $link = $link . '/activation.php?log='.urlencode($login).'&cle='.urlencode($code);
             
             $subject = "Votre nouveau mot de passe" ;
             $entete = "From: inscription@camagru.com";
-            $message = 'Bonjour '. $log.',
+            $message = 'Bonjour '. $login.',
     
             Il semblerait que vous ayez oublié votre mot de passe.
 
@@ -95,14 +95,19 @@ function send_mail_for_change($p)
         }
     else
     {
-            $_SESSION['error'] = "Vous n'avez pas de compte";
+            $_SESSION['error'] = "Ce login n'est pas connu";
             header('Location: ../index.php');
             exit;
     }
 }
 
-
-if ($_POST['sub'] === 'Submit')
-    send_mail_for_change($_POST);
+if ($_GET['login'] != '')
+    send_mail_for_change($_GET['login']);
+else
+{
+    $_SESSION['error'] = "indiquez un login!";
+    header('Location: ../index.php');
+    exit; 
+}
 
 ?>

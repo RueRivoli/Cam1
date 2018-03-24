@@ -209,6 +209,24 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
             echo "Impossible to get the login".$e;
         }
     }
+    //Update notifications
+    if (isset($_POST['Notif']))
+    {   
+        $not = 1;
+        if ($_POST['Notif'] === 'No')
+            $not = 0;
+        try {
+            $st = $db->prepare("UPDATE users SET notif = :noti WHERE login = :log ");
+            $st->bindParam(':noti', $not);
+            $st->bindParam(':log', $log);
+            $log = $_SESSION['login'];
+            $not = $not;
+            $st->execute();
+        }
+        catch(PDOException $e) {
+            echo "Impossible to set the notifications".$e;
+        }
+    }
     if (set($_POST['email']))
     {
         insert_new_mail(htmlspecialchars($_POST['email']), $_SESSION['login']);
@@ -219,6 +237,7 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
     }
     if (isset($_POST['lastpsd']) && isset($_POST['newpsd1']) && isset($_POST['newpsd2']))
         insert_new_psd(htmlspecialchars($_POST['newpsd1']));
+  
     header('Location: ../yourprofile.php');
     exit;
 }

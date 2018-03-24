@@ -104,7 +104,6 @@ catch(PDOException $e) {
 }
 ?>
 
-<script type="text/javascript" src="js/picture.js"></script>
 </div>
 
 <div id="links">

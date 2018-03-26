@@ -40,8 +40,6 @@
     }
     else if ($type === 'png')
     {
-        echo "PAPIER MACJE";
-        die;
         $photo_cam = imagecreatefrompng($p);
         file_put_contents('../photos/b.png', $photo_cam);
     }

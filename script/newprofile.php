@@ -169,7 +169,7 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         if (correct_formula_pseudo($_POST['pseudo']) === 0)
         {
             header('Location: ../modifyprofile.php');
-            exit;
+            //exit;
         }
         
     }
@@ -178,7 +178,7 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         if (correct_formula_email(htmlspecialchars($_POST['email'])) === 0)
         {
             header('Location: ../modifyprofile.php');
-            exit;
+            //exit;
         }
     }
     if (set($_POST['lastpsd']))
@@ -186,14 +186,14 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         if (correct_formula_psd(htmlspecialchars($_POST['lastpsd']), htmlspecialchars($_POST['newpsd1']), htmlspecialchars($_POST['newpsd2'])) === 0)
         {
             header('Location: ../modifyprofile.php');
-            exit;
+            //exit;
         }
     }
     elseif (!(!set($_POST['lastpsd']) && !set($_POST['newpsd1']) && !set($_POST['newpsd2'])))
     {
         $_SESSION['error'] = "Please fill all the passwords areas";
         header('Location: ../modifyprofile.php');
-        exit;
+        //exit;
     }
     include "../config/database.php";
     include "../functions/initdb.php";
@@ -202,6 +202,12 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         
         try {
             $st = $db->prepare("UPDATE users SET login = ? WHERE login = ? ");
+            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
+            $st = $db->prepare("UPDATE post SET login = ? WHERE login = ? ");
+            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
+            $st = $db->prepare("UPDATE comments SET login = ? WHERE login = ? ");
+            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
+            $st = $db->prepare("UPDATE likes SET login = ? WHERE login = ? ");
             $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
             $_SESSION['login'] = htmlspecialchars($_POST['pseudo']);
         }
@@ -233,13 +239,13 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         send_mail_reactivate($_SESSION['login'], htmlspecialchars($_POST['email']));
         header('Location: ../index.php');
         $_SESSION['error'] = "Activate your account in your mailbox"; 
-        exit;
+        //exit;
     }
     if (isset($_POST['lastpsd']) && isset($_POST['newpsd1']) && isset($_POST['newpsd2']))
         insert_new_psd(htmlspecialchars($_POST['newpsd1']));
   
     header('Location: ../yourprofile.php');
-    exit;
+    //exit;
 }
 header('Location: ../yourprofile.php');
 exit;

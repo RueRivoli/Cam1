@@ -74,7 +74,7 @@ function createmontage($photo_cam, $fil)
     $photo_x = imagesx($photo_cam) - imagesx($filter);
     $photo_y = imagesy($photo_cam) - imagesy($filter);
 
-    imageflip($photo_cam, IMG_FLIP_HORIZONTAL);
+    //imageflip($photo_cam, IMG_FLIP_HORIZONTAL);
     $uiid = uniqid();
     imagecopyresampled($photo_cam, $filter, $dst_x, $dst_y, 0, 0, $value_w, $value_h, $value_w, $value_h);
     $p = 'photos/'. $uiid . '.png';
@@ -106,7 +106,6 @@ function savephoto()
             createmontage($photo_cam, $fil);
             else
         {
-
             $p = 'photos/'. $uiid . '.png';
             insertIntoDatabase($p);
             file_put_contents($p, $data);

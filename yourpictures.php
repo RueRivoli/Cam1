@@ -88,7 +88,7 @@ try {
                 </div>
                 <p id="nb_likes"><?php echo $post_set[$i]['nb_likes']?></p>
                 <div id="heart">
-                    <img src="img/mess2.png">
+                    <img src="img/message.png">
                 </div>
                 <p id="nb_coms"><?php echo $post_set[$i]['nb_comments']?></p>
                 <span class="date_crea"><?php echo $tab[$i]['date_creation']?></span>

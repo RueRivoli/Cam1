@@ -88,17 +88,17 @@ if ($nb === 0)
     try {
         $date = date('Y-m-d H:i:s');
         $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity, notif) VALUES (?, ?, ?, ?, ?, ?)");
-        $a->execute(array("Louis14", "flgallois@gmail.com", hash("whirlpool", "Louis14"), "128888", "1", "1"));
-        $a->execute(array("Louis16", "flgallois@gmail.com", hash("whirlpool", "Louis16"), "128123888", "1", "1"));
-        $a->execute(array("Henri4", "flgallois@gmail.com", hash("whirlpool", "Henri4"), "126545", "1", "1"));
-        $a->execute(array("Jmarsal", "flgallois@gmail.com", hash("whirlpool", "Jmarsal11"), "288812", "1", "1"));
-        $a->execute(array("George6", "flgallois@gmail.com", hash("whirlpool", "George6"), "12465313", "1", "1"));
-        $a->execute(array("CR7", "flgallois@gmail.com", hash("whirlpool", "CR7"), "124865", "1", "1"));
-        $a->execute(array("Gattuso", "flgallois@gmail.com", hash("whirlpool", "Gattuso6"), "124865", "1", "1"));
-        $a->execute(array("Falcao", "flgallois@gmail.com", hash("whirlpool", "Falcao9"), "12655545", "1", "1"));
-        $a->execute(array("HowardCarter", "flgallois@gmail.com", hash("whirlpool", "HowardCarter14"), "1264445", "1", "1"));
-        $a->execute(array("Nessie", "flgallois@gmail.com", hash("whirlpool", "Nessie2"), "1264422245", "1", "1"));
-        $a->execute(array("Churchill", "flgallois@gmail.com", hash("whirlpool", "Churchill5"), "126777245", "1", "1"));
+        $a->execute(array("Louis14", "flgallois@gmail.com", hash("whirlpool", "Louis14"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Louis16", "flgallois@gmail.com", hash("whirlpool", "Louis16"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Henri4", "flgallois@gmail.com", hash("whirlpool", "Henri4"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Jmarsal", "flgallois@gmail.com", hash("whirlpool", "Jmarsal11"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("George6", "flgallois@gmail.com", hash("whirlpool", "George6"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("CR7", "flgallois@gmail.com", hash("whirlpool", "CR7"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Gattuso", "flgallois@gmail.com", hash("whirlpool", "Gattuso6"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Falcao", "flgallois@gmail.com", hash("whirlpool", "Falcao9"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("HowardCarter", "flgallois@gmail.com", hash("whirlpool", "HowardCarter14"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Nessie", "flgallois@gmail.com", hash("whirlpool", "Nessie2"), hash("whirlpool", rand()), "1", "1"));
+        $a->execute(array("Churchill", "flgallois@gmail.com", hash("whirlpool", "Churchill5"), hash("whirlpool", rand()), "1", "1"));
 
         $a = $db->prepare("INSERT INTO post (login, date_creation, post_id, nb_likes, nb_comments) VALUES (?, ?, ?, ?, ?)");
         $a->execute(array("Louis14", $date, "ressources/prepared/galglaces.jpg", "4", "0"));

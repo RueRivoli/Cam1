@@ -29,36 +29,20 @@ function  getDataURL() {
         console.log(err.name + ": " + err.message);
     });
 
-
-      // video.addEventListener('canplay', function(ev){
-      //   if (!streaming) {
-      //     height = video.videoHeight / (video.videoWidth/width);
-      //     video.setAttribute('width', width);
-      //     video.setAttribute('height', height);
-      //     canvas.setAttribute('width', width);
-      //     canvas.setAttribute('height', height);
-      //     streaming = true;
-      //   }
-      // }, false);
-     
       function takepicture() {
           canvas.width = width;
           canvas.height = height;
-          
           
           canvas.getContext('2d').drawImage(video, 0, 0, width, height);
           data = canvas.toDataURL('image/png');
           
           var myImg = new Image();
-          // myImg.src = 'img/lion.png';
           myImg.addEventListener('load', function() {
             canvas.getContext('2d').drawImage(myImg, 0, 0, 200, 100);
             dataR = canvas.toDataURL('image/png');
            
           }, false);
 
-          /*if (document.getElementById('filter1').checked)
-            filter = "dolphin";*/
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {

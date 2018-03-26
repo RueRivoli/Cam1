@@ -126,7 +126,5 @@ include "functions/header.php";
 @fgallois 2018
 </footer>
 
-    <script type="text/javascript" src="js/picture.js"></script>
-    <!-- <script type="text/javascript" src="js/commentary.js"></script> -->
 </body>
 </html>

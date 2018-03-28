@@ -7,7 +7,7 @@
         include "../config/database.php";
         include "../functions/initdb.php";
         try {
-            $a = $db->prepare("INSERT INTO post (login, date_creation, post_id, nb_likes, nb_comments) VALUES (:name, NOW(), :cle, :nl, :nc)");
+            $a = $db->prepare("INSERT INTO post (user_login, date_creation, post_id, nb_likes, nb_comments) VALUES (:name, NOW(), :cle, :nl, :nc)");
             $a->bindParam(':name', $name);
             $a->bindParam(':cle', $cle);
             $a->bindParam(':nl', $nl);

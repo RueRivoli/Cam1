@@ -5,8 +5,8 @@ function activ_user()
     include '../config/database.php';
     include "../functions/initdb.php";
     try{
-        $req = $db->prepare("SELECT login, activity FROM users WHERE login= :login");
-        $req->execute(Array('login' => htmlspecialchars($_POST['pseudo'])));
+        $req = $db->prepare("SELECT user_login, activity FROM users WHERE user_login= :user_login");
+        $req->execute(Array('user_login' => htmlspecialchars($_POST['pseudo'])));
     
         if ($line = $req->fetch(PDO::FETCH_ASSOC))
         {
@@ -31,9 +31,9 @@ else if ($_POST['logIN'] === 'log in')
     include "../functions/initdb.php";
     $psd = hash('whirlpool', htmlspecialchars($_POST['pswd']));
     try{
-        $st = $db->prepare("SELECT pswd FROM users WHERE login = :login");
+        $st = $db->prepare("SELECT pswd FROM users WHERE user_login = :user_login");
         
-        if ($st->execute(array(':login' => $_POST['pseudo'])) && $row = $st->fetch())
+        if ($st->execute(array(':user_login' => $_POST['pseudo'])) && $row = $st->fetch())
         {   
             // echo $_POST['pseudo']; 
             // echo "PSD -----          ".$psd."\n";

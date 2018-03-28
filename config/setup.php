@@ -25,14 +25,14 @@ try{
     if($db){
         /*table users*/
 	    $req = "CREATE TABLE IF NOT EXISTS users(
-                    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                    login VARCHAR(15),
+                    id_user SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                    user_login VARCHAR(15),
                     email VARCHAR(25),
                     pswd VARCHAR(150),
                     cle VARCHAR(300) DEFAULT NULL,
                     activity TINYINT DEFAULT 0,
                     notif TINYINT DEFAULT 0,
-                    PRIMARY KEY(id)
+                    PRIMARY KEY(id_user)
 				    );";
         $coord = $db->prepare($req);
         $coord->execute();
@@ -40,13 +40,13 @@ try{
         /*table post*/
 
         $req = "CREATE TABLE IF NOT EXISTS post(
-            id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            login VARCHAR(15),
+            id_post SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            id_user SMALLINT UNSIGNED NOT NULL,
             date_creation DATETIME,
-            post_id VARCHAR(300) DEFAULT NULL,
+            post_url VARCHAR(300) DEFAULT NULL,
             nb_likes INT DEFAULT 0,
             nb_comments INT DEFAULT 0,
-            PRIMARY KEY(id)
+            PRIMARY KEY(id_post)
             );";
         $requ = $db->prepare($req);
         $requ->execute();
@@ -87,7 +87,7 @@ if ($nb === 0)
 {
     try {
         $date = date('Y-m-d H:i:s');
-        $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity, notif) VALUES (?, ?, ?, ?, ?, ?)");
+        $a = $db->prepare("INSERT INTO users (user_login, email, pswd, cle, activity, notif) VALUES (?, ?, ?, ?, ?, ?)");
         $a->execute(array("Louis14", "flgallois@gmail.com", hash("whirlpool", "Louis14"), hash("whirlpool", rand()), "1", "1"));
         $a->execute(array("Louis16", "flgallois@gmail.com", hash("whirlpool", "Louis16"), hash("whirlpool", rand()), "1", "1"));
         $a->execute(array("Henri4", "flgallois@gmail.com", hash("whirlpool", "Henri4"), hash("whirlpool", rand()), "1", "1"));
@@ -100,26 +100,27 @@ if ($nb === 0)
         $a->execute(array("Nessie", "flgallois@gmail.com", hash("whirlpool", "Nessie2"), hash("whirlpool", rand()), "1", "1"));
         $a->execute(array("Churchill", "flgallois@gmail.com", hash("whirlpool", "Churchill5"), hash("whirlpool", rand()), "1", "1"));
 
-        $a = $db->prepare("INSERT INTO post (login, date_creation, post_id, nb_likes, nb_comments) VALUES (?, ?, ?, ?, ?)");
-        $a->execute(array("Louis14", $date, "ressources/prepared/galglaces.jpg", "4", "0"));
-        $a->execute(array("Churchill", $date, "ressources/prepared/churchill.jpg", "2", "0"));
-        $a->execute(array("Henri4",$date, "ressources/prepared/pau.jpg", "4", "1"));
-        $a->execute(array("MarieAntoinette", $date, "ressources/prepared/mariea.jpg", "12", "0"));
-        $a->execute(array("CR7", $date, "ressources/prepared/cr7.jpg", "6", "2"));
-        $a->execute(array("Gattuso", $date, "ressources/prepared/gatt.jpg", "2", "0"));
-        $a->execute(array("Churchill", $date, "ressources/prepared/church2.jpg", "2", "0"));
-        $a->execute(array("Jmarsal", $date, "ressources/prepared/beach.png", "6", "0"));
-        $a->execute(array("HowardCarter", $date, "ressources/prepared/egypte.jpeg", "4", "0"));
-        $a->execute(array("Louis16",$date, "ressources/prepared/louis16.jpg", "12", "2"));
-        $a->execute(array("Falcao", $date, "ressources/prepared/falcao1.jpg", "12", "1"));
-        $a->execute(array("Jmarsal", $date, "ressources/prepared/jm.jpg", "6", "0"));
-        $a->execute(array("Nessie", $date, "ressources/prepared/lochness.jpg", "6", "0"));
-        $a->execute(array("HowardCarter", $date, "ressources/prepared/carter3.jpg", "2", "0"));
-        $a->execute(array("Louis16", $date, "ressources/prepared/louis16b.jpg", "0", "5"));
-        $a->execute(array("Louis14",$date, "ressources/prepared/chavers.jpg", "1", "0"));
-        $a->execute(array("HowardCarter", $date, "ressources/prepared/carter2.jpg", "1", "0"));
-        $a->execute(array("George6", $date, "ressources/prepared/bigben.jpeg", "6", "0"));
-        $a->execute(array("Nessie", $date, "ressources/prepared/urquart.jpg", "2", "0"));
+
+        $a = $db->prepare("INSERT INTO post (id_user, date_creation, post_url, nb_likes, nb_comments) VALUES (?, ?, ?, ?, ?)");
+        $a->execute(array("10", $date, "ressources/prepared/galglaces.jpg", "4", "0"));
+        $a->execute(array("4", $date, "ressources/prepared/churchill.jpg", "2", "0"));
+        $a->execute(array("6",$date, "ressources/prepared/pau.jpg", "4", "1"));
+        $a->execute(array("2", $date, "ressources/prepared/mariea.jpg", "12", "0"));
+        $a->execute(array("7", $date, "ressources/prepared/cr7.jpg", "6", "2"));
+        $a->execute(array("1", $date, "ressources/prepared/gatt.jpg", "2", "0"));
+        $a->execute(array("4", $date, "ressources/prepared/church2.jpg", "2", "0"));
+        $a->execute(array("9", $date, "ressources/prepared/beach.png", "6", "0"));
+        $a->execute(array("5", $date, "ressources/prepared/egypte.jpeg", "4", "0"));
+        $a->execute(array("5",$date, "ressources/prepared/louis16.jpg", "12", "2"));
+        $a->execute(array("3", $date, "ressources/prepared/falcao1.jpg", "12", "1"));
+        $a->execute(array("3", $date, "ressources/prepared/jm.jpg", "6", "0"));
+        $a->execute(array("2", $date, "ressources/prepared/lochness.jpg", "6", "0"));
+        $a->execute(array("9", $date, "ressources/prepared/carter3.jpg", "2", "0"));
+        $a->execute(array("11", $date, "ressources/prepared/louis16b.jpg", "0", "5"));
+        $a->execute(array("1",$date, "ressources/prepared/chavers.jpg", "1", "0"));
+        $a->execute(array("1", $date, "ressources/prepared/carter2.jpg", "1", "0"));
+        $a->execute(array("8", $date, "ressources/prepared/bigben.jpeg", "6", "0"));
+        $a->execute(array("10", $date, "ressources/prepared/urquart.jpg", "2", "0"));
 
         $a = $db->prepare("INSERT INTO comments (post_id, login, text, date_creation) VALUES (?, ?, ?, ?)");
         $a->execute(array("ressources/prepared/falcao1.jpg", "CR7", "Futur ballon d'or", "2017-03-24 17:45:12"));

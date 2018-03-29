@@ -125,17 +125,23 @@ include "functions/header.php";
                 include 'functions/initdb.php';
                 try {
                     
-
-                    $req = $db->prepare("SELECT post_id, date_creation FROM post WHERE DATEDIFF(CURRENT_DATE(), date_creation) <= 1 AND login = :login ORDER BY date_creation DESC");
-                    $req->execute(Array(':login' => $_SESSION['login']));
+                    $st =  $db->prepare('SELECT id_user FROM users WHERE user_login = :user_login');
+                    $st->bindParam(':user_login', $_SESSION['login']);
+                    $st->execute();
+                    $tab = $st->fetch();
+                    $id_user = $tab['id_user'];
+    
+                    $req = $db->prepare("SELECT id_post, post_url, date_creation FROM post WHERE DATEDIFF(CURRENT_DATE(), date_creation) <= 1 AND id_user= :id_user ORDER BY date_creation DESC");
+                    $req->execute(array(':id_user' => $id_user));
+                    //$req->bindParam(':id_user', $id_user);
                     $tab = $req->fetchAll();
                     $i = 0;
                     while ($tab[$i])
                     {
                         echo "<div class=\"cadrage\">";
-                        echo "<img src=\"".$tab[$i]['post_id']."\" >";
+                        echo "<img src=\"".$tab[$i]['post_url']."\" >";
                         echo "<div class=\"delete\">";
-                        echo "<a href=\"script/delete_post.php?post_id=".$tab[$i]['post_id']."&amp;b=1\">";
+                        echo "<a href=\"script/delete_post.php?post_id=".$tab[$i]['id_post']."&amp;b=1\">";
                         echo "<img src=\"img/x2.png\" >";
                         echo "</a>";
                         echo "</div>";

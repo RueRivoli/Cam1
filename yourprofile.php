@@ -25,11 +25,11 @@ if (isset($_SESSION['error']))
 
 <?php
 include 'functions/header.php';
-$pseudo =$_SESSION['login'];
+$pseudo = $_SESSION['login'];
 include 'config/database.php';
 include "functions/initdb.php";
 try {
-    $st = $db->prepare('SELECT email FROM users WHERE login = ?');
+    $st = $db->prepare('SELECT email FROM users WHERE user_login = ?');
     if($st->execute(array($pseudo)) && $row = $st->fetch())
         $mail = $row['email'];
 }
@@ -42,9 +42,9 @@ catch(PDOException $e) {
 
     <div id="profile">
         <?php if (!isset($_SESSION['error']) || $_SESSION['error'] === "")
-            echo "<h1>Your profile</h1>";
+                echo "<h1>Your profile</h1>";
             else
-            echo $_SESSION['error'];
+                echo $_SESSION['error'];
         ?>
         <div class="criteria">
             <span>Pseudo: </span><?php echo $pseudo ?><br/>
@@ -53,7 +53,6 @@ catch(PDOException $e) {
             <span>Email: </span><?php echo $mail ?>
         </div>
         <a class="stylebouton" href="modifyprofile.php">Modify it!</a>
-            <!-- <button type="button">Modify it!</button> -->
     </div>
 </div>
 

@@ -9,8 +9,15 @@ function insertIntoDatabase($p)
     include "config/database.php";
     include "functions/initdb.php";
     try {
-        $a = $db->prepare("INSERT INTO post (login, date_creation, post_id, nb_likes, nb_comments) VALUES (:name, NOW(), :cle, :nl, :nc)");
-        $a->bindParam(':name', $name);
+        $a = $db->prepare("SELECT id_user FROM users WHERE user_login= :user_login");
+        $a->bindParam(':user_login', $_SESSION['login']);
+        $a->execute();
+        $tab = $a->fetch();
+
+        $id= $tab['id_user'];
+
+        $a = $db->prepare("INSERT INTO post (id_user, date_creation, id_post, nb_likes, nb_comments) VALUES (:id, NOW(), :cle, :nl, :nc)");
+        $a->bindParam(':id', $id);
         $a->bindParam(':cle', $cle);
         $a->bindParam(':nl', $nl);
         $a->bindParam(':nc', $nc);

@@ -12,19 +12,24 @@ include 'functions/initdb.php';
 include 'functions/user_like.php';
 
 try{
-    $req = $db->prepare("SELECT login, date_creation, post_id, nb_likes, nb_comments FROM post WHERE id= :id");
+    $req = $db->prepare("SELECT id_user, date_creation, id_post, nb_likes, nb_comments FROM post WHERE id_post= :id");
     $req->execute(Array('id' => htmlspecialchars($_GET['id'])));
     if ($line = $req->fetch(PDO::FETCH_ASSOC))
     {
-        $log = $line['login'];
+        $id_user = $line['id_user'];
         $date_creation = $line['date_creation'];
-        $post_id = $line['post_id'];
+        $post_id = $line['id_post'];
         $nb_likes = $line['nb_likes'];
         $nb_comments = $line['nb_comments'];
     }
     $_SESSION['post'] = $line['post_id'];
     $_SESSION['img_id'] = htmlspecialchars($_GET['id']);
-    $req = $db->prepare("SELECT , date_creation FROM post WHERE id= :id");
+
+    $st =  $db->prepare('SELECT user_login FROM users WHERE id_user = :id_user');
+    $st->bindParam(':id_user', $id_user);
+    $st->execute();
+    $tab = $st->fetch();
+    $log = $tab['user_login'];
 }
 catch(PDOException $e) {
     echo "Can't have access to table post! The mistake is : ".$e;

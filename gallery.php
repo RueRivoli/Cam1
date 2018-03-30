@@ -32,10 +32,12 @@ include "functions/header.php";
 include 'config/database.php';
 include "functions/initdb.php";
 try {
+
     $st =  $db->prepare('SELECT COUNT(*) FROM post ');
     $st->execute();
-    $tab = $st->fetchAll();
-    $nb_pic = $tab[0]['COUNT(*)'];
+    $tab = $st->fetch();
+    $nb_pic = $tab['COUNT(*)'];
+
     $nb_pages = $nb_pic / 12;
     if ($nb_pages % 12 > 0)
         $nb_pages++;
@@ -44,6 +46,7 @@ try {
     $sql->bindValue(':offset', $offset, PDO::PARAM_INT);
     $sql->execute();
     $tab = $sql->fetchAll();
+
     $i = 0;
     while ($tab[$i])
     {

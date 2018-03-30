@@ -9,7 +9,6 @@ catch(PDOException $e) {
     echo "Impossible to log on the servor! The mistake is : ".$e;
 }
 
-
 try{
     $req = "CREATE DATABASE IF NOT EXISTS `".$db_name."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
     $db->query($req);
@@ -48,30 +47,30 @@ try{
             nb_comments INT DEFAULT 0,
             PRIMARY KEY(id_post)
             );";
-        $requ = $db->prepare($req);
-        $requ->execute();
+        $req = $db->prepare($req);
+        $req->execute();
 
 
         $req = "CREATE TABLE IF NOT EXISTS comments(
             id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
             post_id VARCHAR(300) DEFAULT NULL,
-            login VARCHAR(15) DEFAULT NULL,
+            id_user SMALLINT UNSIGNED NOT NULL,
             text VARCHAR(500) DEFAULT NULL,
             date_creation DATETIME NOT NULL,
             PRIMARY KEY(id)
             );";
-        $requ = $db->prepare($req);
-        $requ->execute();
+        $req = $db->prepare($req);
+        $req->execute();
 
 
         $req = "CREATE TABLE IF NOT EXISTS likes(
             id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
             post_id VARCHAR(300) DEFAULT NULL,
-            login VARCHAR(15) DEFAULT NULL,
+            id_user SMALLINT UNSIGNED NOT NULL,
             PRIMARY KEY(id)
             );";
-        $requ = $db->prepare($req);
-        $requ->execute();
+        $req = $db->prepare($req);
+        $req->execute();
 
         $sql = $db->prepare('SELECT * FROM users');
         $sql->execute();
@@ -111,7 +110,7 @@ if ($nb === 0)
         $a->execute(array("4", $date, "ressources/prepared/church2.jpg", "2", "0"));
         $a->execute(array("9", $date, "ressources/prepared/beach.png", "6", "0"));
         $a->execute(array("5", $date, "ressources/prepared/egypte.jpeg", "4", "0"));
-        $a->execute(array("5",$date, "ressources/prepared/louis16.jpg", "12", "2"));
+        $a->execute(array("5",  $date, "ressources/prepared/louis16.jpg", "12", "2"));
         $a->execute(array("3", $date, "ressources/prepared/falcao1.jpg", "12", "1"));
         $a->execute(array("3", $date, "ressources/prepared/jm.jpg", "6", "0"));
         $a->execute(array("2", $date, "ressources/prepared/lochness.jpg", "6", "0"));
@@ -122,18 +121,18 @@ if ($nb === 0)
         $a->execute(array("8", $date, "ressources/prepared/bigben.jpeg", "6", "0"));
         $a->execute(array("10", $date, "ressources/prepared/urquart.jpg", "2", "0"));
 
-        $a = $db->prepare("INSERT INTO comments (post_id, login, text, date_creation) VALUES (?, ?, ?, ?)");
-        $a->execute(array("ressources/prepared/falcao1.jpg", "CR7", "Futur ballon d'or", "2017-03-24 17:45:12"));
-        $a->execute(array("ressources/prepared/cr7.jpg", "Gattuso", "T es nul", "2016-03-24 12:55:02"));
-        $a->execute(array("ressources/prepared/louis16.jpg", "MarieAntoinette", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/pau.jpg", "Churchill", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/cr7.jpg", "CR7", "Beau goss", "2018-01-01 01:05:32"));
-        $a->execute(array("ressources/prepared/louis16.jpg", "MarieAntoinette", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "Jmarsal", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "Nessie", "Y en a marre ou est le painnnn???", "1989-07-01 01:05:32"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "Falcao", "Vous nous prenez pour des imbeciles?", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "Marieantoinette", "Du calme", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "CR7", "ouaaii", "2018-01-01 01:05:32"));
+        $a = $db->prepare("INSERT INTO comments (post_id, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
+        $a->execute(array("ressources/prepared/falcao1.jpg", "4", "Futur ballon d'or", "2017-03-24 17:45:12"));
+        $a->execute(array("ressources/prepared/cr7.jpg", "8", "T es nul", "2016-03-24 12:55:02"));
+        $a->execute(array("ressources/prepared/louis16.jpg", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
+        $a->execute(array("ressources/prepared/pau.jpg", "9", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
+        $a->execute(array("ressources/prepared/cr7.jpg", "4", "Beau goss", "2018-01-01 01:05:32"));
+        $a->execute(array("ressources/prepared/louis16.jpg", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
+        $a->execute(array("ressources/prepared/louis16b.jpg", "2", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
+        $a->execute(array("ressources/prepared/louis16b.jpg", "6", "Y en a marre ou est le painnnn???", "1989-07-01 01:05:32"));
+        $a->execute(array("ressources/prepared/louis16b.jpg", "5", "Vous nous prenez pour des imbeciles?", "2016-03-15 05:55:02"));
+        $a->execute(array("ressources/prepared/louis16b.jpg", "10", "Du calme", "2015-05-29 13:55:02"));
+        $a->execute(array("ressources/prepared/louis16b.jpg", "4", "ouaaii", "2018-01-01 01:05:32"));
         }
     catch(PDOException $e) {
         echo "Impossible to insert the instances! The mistake is: ".$e;

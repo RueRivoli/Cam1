@@ -43,61 +43,57 @@ try {
     $st =  $db->prepare('SELECT COUNT(*) FROM post INNER JOIN users ON users.id_user = post.id_user WHERE users.user_login = :user_login');
     $st->bindParam(':user_login', $log);
     $st->execute();
-    
-    $tab = $st->fetchAll();
-    $nb_pic = $tab[0]['COUNT(*)'];
-    $st =  $db->prepare('SELECT id_user FROM users WHERE user_login = :user_login');
-    $st->bindParam(':user_login', $log);
-    $st->execute();
     $tab = $st->fetch();
-    
-    $id_user = $tab['id_user']; 
+
+    $nb_pic = $tab['COUNT(*)'];
     $nb_pages = floor($nb_pic / 12);
+
     if ($nb_pic % 12 > 0)
-        $nb_pages++;
-    $offset = ($index - 1) * 12;
-    $sql = $db->prepare("SELECT id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post WHERE id_user= :id_user ORDER BY id_post DESC LIMIT 12 OFFSET :offset");
-    $sql->bindParam(':id_user', $id_user);
-    
+         $nb_pages++;
+     $offset = ($index - 1) * 12;
+
+    $sql = $db->prepare("SELECT user_login, id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON p.id_user = u.id_user WHERE u.user_login = :user_login ORDER BY id_post DESC LIMIT 12 OFFSET :offset");
+    $sql->bindParam(':user_login', $log);
     $sql->bindParam(':offset', $offset, PDO::PARAM_INT);
     $sql->execute();
-    $post_set = $sql->fetchAll();
+    $tab = $sql->fetchAll();
+
     $i = 0;
-    while ($post_set[$i])
+    while ($tab[$i])
     {
         ?>
 
     <div class="picture">
         <div class="entete">
         <span class="login"><?php echo $log ?></span>
-        <span class="date_crea"><?php echo $post_set[$i]['date_creation'] ?></span>
+        <span class="date_crea"><?php echo $tab[$i]['date_creation'] ?></span>
         </div>
         <div class="poster">
         <?php
                 if (isset($_SESSION['login']) && $_SESSION['login'] !== "")
                 {
-                    echo "<a href=\"post.php?id=".$post_set[$i]['id_post']."\">";
-                    echo "<img src=\"".$post_set[$i]['post_url']."\"></a>";
+                    echo "<a href=\"post.php?id=".$tab[$i]['id_post']."\">";
+                    echo "<img src=\"".$tab[$i]['post_url']."\"></a>";
                 }
                 else
-                    echo "<img src=\".$post_set[$i]['post_url']\">";
+                    echo "<img src=\".$tab[$i]['post_url']\">";
             ?>
             
             <div class="foot2">
                 <div id="heart">
-                    <a href="script/like.php?post_id=<?php echo $post_set[$i]['post_id']?>&amp;b=1">
+                    <a href="script/like.php?post_id=<?php echo $tab[$i]['post_id']?>&amp;b=1">
                     <?php
-                        if (if_user_like($post_set[$i]['post_url'], $log) === 1)
+                        if (if_user_like($tab[$i]['post_url'], $log) === 1)
                             echo "<img src=\"img/redlike.png\"></a>";
-                        elseif (if_user_like($post_set[$i]['post_url'], $log) === 0)
+                        elseif (if_user_like($tab[$i]['post_url'], $log) === 0)
                             echo "<img src=\"img/like.png\"></a>";
                     ?>
                 </div>
-                <p id="nb_likes"><?php echo $post_set[$i]['nb_likes']?></p>
+                <p id="nb_likes"><?php echo $tab[$i]['nb_likes']?></p>
                 <div id="heart">
                     <img src="img/message.png">
                 </div>
-                <p id="nb_coms"><?php echo $post_set[$i]['nb_comments']?></p>
+                <p id="nb_coms"><?php echo $tab[$i]['nb_comments']?></p>
                 <span class="date_crea"><?php echo $tab[$i]['date_creation']?></span>
             </div>
         </div>

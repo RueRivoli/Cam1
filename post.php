@@ -12,24 +12,23 @@ include 'functions/initdb.php';
 include 'functions/user_like.php';
 
 try{
-    $req = $db->prepare("SELECT id_user, date_creation, id_post, nb_likes, nb_comments FROM post WHERE id_post= :id");
-    $req->execute(Array('id' => htmlspecialchars($_GET['id'])));
-    if ($line = $req->fetch(PDO::FETCH_ASSOC))
+
+    $sql = $db->prepare("SELECT user_login, u.id_user, id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON p.id_user = u.id_user WHERE p.id_post = :id_post");
+    $sql->bindParam(':id_post', htmlspecialchars($_GET['id']));
+    $sql->execute();
+    if ($line = $sql->fetch(PDO::FETCH_ASSOC))
     {
         $id_user = $line['id_user'];
         $date_creation = $line['date_creation'];
         $post_id = $line['id_post'];
+        $post_url = $line['post_url'];
         $nb_likes = $line['nb_likes'];
         $nb_comments = $line['nb_comments'];
+        $log = $line['user_login'];
     }
-    $_SESSION['post'] = $line['post_id'];
+    $_SESSION['post'] = $post_id;
     $_SESSION['img_id'] = htmlspecialchars($_GET['id']);
-
-    $st =  $db->prepare('SELECT user_login FROM users WHERE id_user = :id_user');
-    $st->bindParam(':id_user', $id_user);
-    $st->execute();
-    $tab = $st->fetch();
-    $log = $tab['user_login'];
+    
 }
 catch(PDOException $e) {
     echo "Can't have access to table post! The mistake is : ".$e;
@@ -65,7 +64,7 @@ include "functions/header.php";
     </div>
 
     <div class="shot">
-    <img class="capture" src= <?php echo $post_id?>>
+    <img class="capture" src= <?php echo $post_url?>>
     </div>
     <div class="foot">
         <div id="heart">

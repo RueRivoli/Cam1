@@ -3,13 +3,16 @@
 function if_user_like($postid, $login){
     include 'config/database.php';
     include 'functions/initdb.php';
+    
     try {
-        $sql = $db->prepare("SELECT id, post_id, login FROM likes WHERE post_id = ? AND login = ?");
+
+        $sql = $db->prepare("SELECT COUNT(*) FROM likes l INNER JOIN users u ON l.id_user = u.id_user WHERE l.id_post = ? AND u.user_login = ?");
         $sql->execute(array($postid, $login));
-        $has_liked =  $sql->rowCount();
-        if ($has_liked === 0)
-            return 0;
-        else if ($has_liked === 1)
+        $tab = $sql->fetch();
+        $has_liked = $tab['COUNT(*)'];
+        if ($has_liked == 0)
+            return (0);
+         else if ($has_liked == 1)
             return (1);
     }
     catch(PDOException $e) {

@@ -16,13 +16,12 @@ function insertIntoDatabase($p)
 
         $id= $tab['id_user'];
 
-        $a = $db->prepare("INSERT INTO post (id_user, date_creation, id_post, nb_likes, nb_comments) VALUES (:id, NOW(), :cle, :nl, :nc)");
+        $a = $db->prepare("INSERT INTO post (id_user, date_creation, post_url, nb_likes, nb_comments) VALUES (:id, NOW(), :p, :nl, :nc)");
         $a->bindParam(':id', $id);
-        $a->bindParam(':cle', $cle);
         $a->bindParam(':nl', $nl);
+        $a->bindParam(':p', $p);
         $a->bindParam(':nc', $nc);
         $name = $_SESSION['login'];
-        $cle = $p;
         $nl = 0;
         $nc = 0;
         $a->execute();
@@ -111,10 +110,10 @@ function savephoto()
         $photo_cam = imagecreatefromstring($data);
         if ($fil !== 'none')
             createmontage($photo_cam, $fil);
-            else
+        else
         {
             $p = 'photos/'. $uiid . '.png';
-            insertIntoDatabase($p);
+            $id_post = insertIntoDatabase($p);
             file_put_contents($p, $data);
             echo $p;
         }

@@ -39,15 +39,14 @@ if (isset($_GET["page"]))
 try {
     
     $log = $_SESSION['login'];
-
-    $st =  $db->prepare('SELECT COUNT(*) FROM post INNER JOIN users ON users.id_user = post.id_user WHERE users.user_login = :user_login');
+    
+    $st = $db->prepare('SELECT COUNT(*) FROM post p INNER JOIN users u ON u.id_user = p.id_user WHERE user_login = :user_login');
     $st->bindParam(':user_login', $log);
     $st->execute();
     $tab = $st->fetch();
 
     $nb_pic = $tab['COUNT(*)'];
     $nb_pages = floor($nb_pic / 12);
-
     if ($nb_pic % 12 > 0)
          $nb_pages++;
      $offset = ($index - 1) * 12;

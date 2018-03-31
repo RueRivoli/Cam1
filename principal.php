@@ -44,9 +44,7 @@ include "functions/header.php";
             {
                 $b = 1;
                 if ($_SESSION['filter'] == $filter[$i])
-                {
                     $b = "class= \"valided\"";
-                }
                 echo "<div class=\"filter\">";
                 echo "<div class=\"collage\">";
                 echo "<img id=\"".$id[$i]."\" src=\"img/".$filter[$i].".png\">";
@@ -133,11 +131,11 @@ include "functions/header.php";
     
                     $req = $db->prepare("SELECT id_post, post_url, date_creation FROM post WHERE DATEDIFF(CURRENT_DATE(), date_creation) <= 1 AND id_user= :id_user ORDER BY date_creation DESC");
                     $req->execute(array(':id_user' => $id_user));
-                    //$req->bindParam(':id_user', $id_user);
                     $tab = $req->fetchAll();
                     $i = 0;
                     while ($tab[$i])
                     {
+                    
                         echo "<div class=\"cadrage\">";
                         echo "<img src=\"".$tab[$i]['post_url']."\" >";
                         echo "<div class=\"delete\">";

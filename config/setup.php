@@ -53,7 +53,7 @@ try{
 
         $req = "CREATE TABLE IF NOT EXISTS comments(
             id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            post_id VARCHAR(300) DEFAULT NULL,
+            id_post VARCHAR(300) DEFAULT NULL,
             id_user SMALLINT UNSIGNED NOT NULL,
             text VARCHAR(500) DEFAULT NULL,
             date_creation DATETIME NOT NULL,
@@ -65,7 +65,7 @@ try{
 
         $req = "CREATE TABLE IF NOT EXISTS likes(
             id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-            post_id VARCHAR(300) DEFAULT NULL,
+            id_post VARCHAR(300) DEFAULT NULL,
             id_user SMALLINT UNSIGNED NOT NULL,
             PRIMARY KEY(id)
             );";
@@ -121,7 +121,7 @@ if ($nb === 0)
         $a->execute(array("8", $date, "ressources/prepared/bigben.jpeg", "6", "0"));
         $a->execute(array("10", $date, "ressources/prepared/urquart.jpg", "2", "0"));
 
-        $a = $db->prepare("INSERT INTO comments (post_id, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
+        $a = $db->prepare("INSERT INTO comments (id_post, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
         $a->execute(array("ressources/prepared/falcao1.jpg", "4", "Futur ballon d'or", "2017-03-24 17:45:12"));
         $a->execute(array("ressources/prepared/cr7.jpg", "8", "T es nul", "2016-03-24 12:55:02"));
         $a->execute(array("ressources/prepared/louis16.jpg", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));

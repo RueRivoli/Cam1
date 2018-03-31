@@ -12,7 +12,7 @@
         <ul>
         <li class="logo"><a href="gallery.php">Camagru</a>
         </li>
-        <li class="menuprincipal"><a href="index.php">@<?php echo $_SESSION['login']?></a><img src="img/arrow2.png">
+        <li class="menuprincipal">@<?php echo $_SESSION['login']?><img src="img/arrow2.png">
         <ul class="submenu">
             <?php if (isset($_SESSION['login']) && $_SESSION['login'] != "")
             {

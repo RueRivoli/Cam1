@@ -33,7 +33,7 @@ include 'config/database.php';
 include "functions/initdb.php";
 try {
 
-    $st =  $db->prepare('SELECT COUNT(*) FROM post ');
+    $st =  $db->prepare('SELECT COUNT(*) FROM post');
     $st->execute();
     $tab = $st->fetch();
     $nb_pic = $tab['COUNT(*)'];
@@ -42,7 +42,7 @@ try {
     if ($nb_pages % 12 > 0)
         $nb_pages++;
     $offset = ($index - 1) * 12;
-    $sql = $db->prepare("SELECT user_login, id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post INNER JOIN users ON users.id_user = post.id_user ORDER BY id_post DESC LIMIT 12 OFFSET :offset");
+    $sql = $db->prepare("SELECT user_login, id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON u.id_user = p.id_user ORDER BY id_post DESC LIMIT 12 OFFSET :offset");
     $sql->bindValue(':offset', $offset, PDO::PARAM_INT);
     $sql->execute();
     $tab = $sql->fetchAll();
@@ -50,12 +50,11 @@ try {
     $i = 0;
     while ($tab[$i])
     {
-        ?>
+    ?>
 
     <div class="picture">
         <div class="entete">
         <span class="login"><?php echo $tab[$i]['user_login']?></span>
-        
         </div>
         <div class="poster">
             <?php
@@ -88,27 +87,27 @@ try {
                 <div id="heart">
                     <img src="img/message.png">
                 </div>
-                <p id="nb_coms"><?php   echo "   ".$tab[$i]['nb_comments']?></p>
+                <p id="nb_coms"><?php echo $tab[$i]['nb_comments']?></p>
                 <span class="date_crea"><?php echo $tab[$i]['date_creation']?></span>
             </div>
         </div>
     </div>
      <?php
      $i++;
-            }
+    }
 }
 catch(PDOException $e) {
     echo "Impossible to display the post! The mistake is : ".$e;
 }
 ?>
 <div id="links">
-<?php 
-$i = 1;
-while ($i < $nb_pages)
-{
-    echo "<a class = \"numbers\" href=\"gallery.php?page=".$i."\"><img src=\"img/".$i.".png\"></a>";
-    $i++;
-}
+    <?php 
+    $i = 1;
+    while ($i < $nb_pages)
+    {
+        echo "<a class = \"numbers\" href=\"gallery.php?page=".$i."\"><img src=\"img/".$i.".png\"></a>";
+        $i++;
+    }
 ?>
 
 </div>

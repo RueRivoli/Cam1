@@ -12,23 +12,40 @@ include 'functions/initdb.php';
 include 'functions/user_like.php';
 
 try{
-
-    $sql = $db->prepare("SELECT user_login, u.id_user, id_post, post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON p.id_user = u.id_user WHERE p.id_post = :id_post");
-    $sql->bindParam(':id_post', htmlspecialchars($_GET['id']));
-    $sql->execute();
-    if ($line = $sql->fetch(PDO::FETCH_ASSOC))
+    if (isset($_GET['id']))
     {
-        $id_user = $line['id_user'];
-        $date_creation = $line['date_creation'];
-        $post_id = $line['id_post'];
-        $post_url = $line['post_url'];
-        $nb_likes = $line['nb_likes'];
-        $nb_comments = $line['nb_comments'];
-        $log = $line['user_login'];
+        $idp = htmlspecialchars($_GET['id']);
+        $sql = $db->prepare("SELECT user_login, u.id_user,post_url, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON p.id_user = u.id_user WHERE p.id_post = :id_post");
+        $sql->bindParam(':id_post', $idp);
+        $sql->execute();
+        if ($line = $sql->fetch(PDO::FETCH_ASSOC))
+        {
+            $id_user = $line['id_user'];
+            $date_creation = $line['date_creation'];
+            $post_url = $line['post_url'];
+            $nb_likes = $line['nb_likes'];
+             $nb_comments = $line['nb_comments'];
+            $log = $line['user_login'];
+        }
+        $_SESSION['post'] = $idp;
     }
-    $_SESSION['post'] = $post_id;
-    $_SESSION['img_id'] = htmlspecialchars($_GET['id']);
-    
+    else if (isset($_GET['purl']))
+    {
+        $purl = htmlspecialchars($_GET['purl']);
+        $sql = $db->prepare("SELECT user_login, u.id_user, p.id_post, nb_likes, nb_comments, DATE_FORMAT(date_creation, '%d / %m') AS date_creation FROM post p INNER JOIN users u ON p.id_user = u.id_user WHERE p.post_url = :post_url");
+        $sql->bindParam(':post_url', $purl);
+        $sql->execute();
+        if ($line = $sql->fetch(PDO::FETCH_ASSOC))
+        {
+            $id_user = $line['id_user'];
+            $date_creation = $line['date_creation'];
+            $idp = $line['id_post'];
+            $nb_likes = $line['nb_likes'];
+            $nb_comments = $line['nb_comments'];
+            $log = $line['user_login'];
+        }
+        $_SESSION['post'] = $idp;
+    }
 }
 catch(PDOException $e) {
     echo "Can't have access to table post! The mistake is : ".$e;
@@ -68,26 +85,27 @@ include "functions/header.php";
     </div>
     <div class="foot">
         <div id="heart">
-        <a href="script/like.php?post_id=<?php echo $post_id?>&amp;b=2&amp;id=<?php echo $_GET['id']?>">
+        <a href="script/like.php?post_id=<?php echo $idp?>&amp;b=2">
         <?php
-            if (if_user_like($post_id, $_SESSION['login']) === 1)
+        $val = if_user_like($post_id, $_SESSION['login']);
+            if ($val >= 1)
                 echo "<img src=\"img/redlike.png\"></a>";
-            elseif (if_user_like($post_id, $_SESSION['login']) === 0)
+            else
                 echo "<img src=\"img/like.png\"></a>";
         ?>
         </div>
         <?php
-                    if (if_user_like($post_id, $_SESSION['login']) === 1)
-                        echo "<p id=\"nb_likes_red\">";
-                    else
-                        echo "<p id=\"nb_likes\">";
+            if (if_user_like($post_id, $_SESSION['login']) === 1)
+                echo "<p id=\"nb_likes_red\">";
+            else
+                echo "<p id=\"nb_likes\">";
             echo $nb_likes?></p>
             <div id="heart">
                 <img src="img/message.png">
             </div>
             <p id="nb_coms"><?php echo $nb_comments?></p>
             <div id="trash">
-                <a href="script/delete_post.php?post_id=<?php echo $post_id?>&amp;b=0"><img src="img/trash2.png"></a>
+                <a href="script/delete_post.php?post_id=<?php echo $idp?>&amp;b=0"><img src="img/trash2.png"></a>
             </div>
     </div>
 
@@ -97,14 +115,14 @@ include "functions/header.php";
      <?php 
         include "functions/initdb.php";
         try{
-            $req = $db->prepare("SELECT login, text, date_creation FROM comments WHERE post_id = :postid ORDER BY date_creation ASC");
-            if ($req->execute(array(':postid' => $post_id)) && $tab = $req->fetchAll())
+            $req = $db->prepare("SELECT u.id_user, u.user_login, c.text, c.date_creation FROM comments c INNER JOIN users u ON c.id_user = u.id_user WHERE c.id_post = ? ORDER BY date_creation ASC");
+            if ($req->execute(array($post_id)) && $tab = $req->fetchAll())
             {
                 $i = 0;
                 while ($tab[$i])
                 {
                     echo "<div class=\"one_com\">";
-                    echo "<div class=\"author\"><div class=\"namelog\">".$tab[$i]['login']."</div></div>";
+                    echo "<div class=\"author\"><div class=\"namelog\">".$tab[$i]['user_login']."</div></div>";
                     echo "<div class=\"mess\"><div id=\"writing\">".$tab[$i]['text']."</div></div>";
                     echo "</div>";
                     $i++;

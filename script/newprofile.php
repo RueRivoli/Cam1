@@ -9,7 +9,7 @@ function loginexist($p)
     include "../functions/initdb.php";
     try {
        
-        $sql = $db->prepare("SELECT id FROM users WHERE login = ?");
+        $sql = $db->prepare("SELECT id_user FROM users WHERE user_login = ?");
         $sql->execute(array($p));
         $nb_login = $sql->rowCount();
         
@@ -30,9 +30,9 @@ function login_pswd_associated($p)
     include "../config/database.php";
     include "../functions/initdb.php";
     try {
-        //$sql = $db->prepare("SELECT login, pswd FROM users WHERE login= ? AND pswd = ? AND activity = ?");
-        $sql = $db->prepare("SELECT login, pswd FROM users WHERE login=:log AND pswd = :pd AND activity = :a");
-        $sql->bindParam(':log', $login);
+  
+        $sql = $db->prepare("SELECT user_login, pswd FROM users WHERE user_login=:logi AND pswd = :pd AND activity = :a");
+        $sql->bindParam(':logi', $login);
         $sql->bindParam(':pd', $psd);
         $sql->bindParam(':a', $activ);
         $sql->execute();
@@ -91,9 +91,9 @@ function insert_new_mail($mail, $log){
     include "../config/database.php";
     include "../functions/initdb.php";
     try {
-        $st = $db->prepare("UPDATE users SET email = ? WHERE login = ? ");
+        $st = $db->prepare("UPDATE users SET email = ? WHERE user_login = ? ");
         $st->execute(array($mail, $log));
-        $st = $db->prepare("UPDATE users SET activity= ? WHERE login = ? ");
+        $st = $db->prepare("UPDATE users SET activity= ? WHERE user_login = ? ");
         $st->execute(array(0, $log));
     }
     catch(PDOException $e) {
@@ -106,9 +106,9 @@ function send_mail_reactivate($log, $mail)
     include "../config/database.php";
     include "../functions/initdb.php";
     try {
-        $a = $db->prepare("UPDATE users SET cle= :cle WHERE login = :login");
+        $a = $db->prepare("UPDATE users SET cle= :cle WHERE user_login = :user_login");
         $a->bindParam(':cle', $code);
-        $a->bindParam(':login', $log);
+        $a->bindParam(':user_login', $log);
         $code = hash("whirlpool", rand());
         $a->execute();
     }
@@ -141,9 +141,9 @@ function insert_new_psd($psd)
     include "../config/database.php";
     include "../functions/initdb.php";
     try {
-        $a = $db->prepare("UPDATE users SET pswd= :psd WHERE login = :login");
+        $a = $db->prepare("UPDATE users SET pswd= :psd WHERE user_login = :user_login");
         $a->bindParam(':psd', $pswd);
-        $a->bindParam(':login', $_SESSION['login']);
+        $a->bindParam(':user_login', $_SESSION['login']);
         $pswd = hash("whirlpool", $psd);
         $a->execute();
     }
@@ -199,15 +199,8 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
     include "../functions/initdb.php";
     if (set($_POST['pseudo']))
     {
-        
         try {
-            $st = $db->prepare("UPDATE users SET login = ? WHERE login = ? ");
-            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
-            $st = $db->prepare("UPDATE post SET login = ? WHERE login = ? ");
-            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
-            $st = $db->prepare("UPDATE comments SET login = ? WHERE login = ? ");
-            $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
-            $st = $db->prepare("UPDATE likes SET login = ? WHERE login = ? ");
+            $st = $db->prepare("UPDATE users SET user_login = ? WHERE user_login = ?");
             $st->execute(array(htmlspecialchars($_POST['pseudo']), $_SESSION['login']));
             $_SESSION['login'] = htmlspecialchars($_POST['pseudo']);
         }
@@ -222,11 +215,10 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         if ($_POST['Notif'] === 'No')
             $not = 0;
         try {
-            $st = $db->prepare("UPDATE users SET notif = :noti WHERE login = :log ");
+            $st = $db->prepare("UPDATE users SET notif = :noti WHERE user_login = :log ");
             $st->bindParam(':noti', $not);
             $st->bindParam(':log', $log);
             $log = $_SESSION['login'];
-            $not = $not;
             $st->execute();
         }
         catch(PDOException $e) {

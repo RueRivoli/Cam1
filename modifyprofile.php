@@ -31,6 +31,7 @@ $pseudo = $_SESSION['login'];
 include 'config/database.php';
 include "functions/initdb.php";
 try {
+
     $st = $db->prepare('SELECT email FROM users WHERE user_login = ?');
     if($st->execute(array($pseudo)) && $row = $st->fetch())
         $mail = $row['email'];

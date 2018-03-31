@@ -85,7 +85,7 @@ function  getDataURL() {
         // /*Creation of the link on the cross*/
         var newLink = document.createElement('a');
         newLink.id = 'delpost_link';
-        newLink.href = 'script/delete_post.php?post_id='+ xhr.responseText + '&b=1';
+        newLink.href = 'script/delete_post.php?post_url='+ xhr.responseText + '&b=1';
         newLink.title = xhr.responseText;
 
         newCadrage.appendChild(newImg);

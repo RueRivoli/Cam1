@@ -6,17 +6,23 @@ function insertCom()
     include "../config/database.php";
     include "../functions/initdb.php";
     try {
-        
-        $a = $db->prepare("INSERT INTO comments (post_id, login, text, date_creation) VALUES (:postid, :login, :txt, NOW())");
-        $a->bindParam(':postid', $postid);
-        $a->bindParam(':login', $login);
-        $a->bindParam(':txt', $txt);
         $login = $_SESSION['login'];
+        $a = $db->prepare("SELECT id_user FROM users WHERE user_login = :user_login");
+        $a->bindParam(':user_login', $login);
+        $a->execute();
+        $tab = $a->fetch();
+        $id_user = $tab['id_user'];
+
+        $a = $db->prepare("INSERT INTO comments (id_post, id_user, text, date_creation) VALUES (:postid, :id_user, :txt, NOW())");
+        $a->bindParam(':postid', $postid);
+        $a->bindParam(':id_user', $id_user);
+        $a->bindParam(':txt', $txt);
+        $id_user = $tab['id_user'];
         $postid = $_SESSION['post'];
         $txt = htmlspecialchars($_POST['text']);
         $a->execute();
 
-        $update = $db->prepare("UPDATE post SET nb_comments = nb_comments + 1 WHERE post_id = ?");
+        $update = $db->prepare("UPDATE post SET nb_comments = nb_comments + 1 WHERE id_post = ?");
         $update->execute(array($postid));
     }
     catch(PDOException $e) {
@@ -36,25 +42,27 @@ function warn_for_comment()
     try {
 
         $postid = $_SESSION['post'];
-        $st = $db->prepare("SELECT login FROM post where post_id = ?");
+        $st = $db->prepare("SELECT id_user FROM post where id_post = ?");
         $st->execute(array($postid));
         $row = $st->fetch();
-        $dest_user = $row['login'];
-
-        $st = $db->prepare("SELECT notif FROM users WHERE login = :login ");
-        $st->execute(array(':login' => $dest_user));
+        $id_user = $row['id_user'];
+   
+        $st = $db->prepare("SELECT notif FROM users WHERE id_user= :id_user ");
+        $st->execute(array(':id_user' => $id_user));
         $row = $st->fetch();
         $notif = $row['notif']; 
 
-        
+      
         if ($notif == 1)
         {
-            $st = $db->prepare("SELECT email FROM users where login = ?");
-            $st->execute(array($dest_user));
+           
+            $st = $db->prepare("SELECT email FROM users where id_user = ?");
+            $st->execute(array($id_user));
             $row2 = $st->fetch();
             $dest = $row2['email'];
-            $message = "Salut c'est Camagru,
-    
+            
+            $message = "Salut c'est Camagru,    
+
             Votre post a reçu un commentaire !
 
             En effet, "

@@ -7,12 +7,17 @@
         include "../config/database.php";
         include "../functions/initdb.php";
         try {
-            $a = $db->prepare("INSERT INTO post (user_login, date_creation, post_id, nb_likes, nb_comments) VALUES (:name, NOW(), :cle, :nl, :nc)");
-            $a->bindParam(':name', $name);
-            $a->bindParam(':cle', $cle);
+            $a = $db->prepare("SELECT id_user FROM users where user_login =:userl");
+            $a->bindParam(':userl', $_SESSION['login']);
+            $a->execute();
+            $tab = $a->fetch();
+
+            $a = $db->prepare("INSERT INTO post (id_user, date_creation, post_url, nb_likes, nb_comments) VALUES (:idu, NOW(), :purl, :nl, :nc)");
+            $a->bindParam(':idu', $idu);
+            $a->bindParam(':purl', $cle);
             $a->bindParam(':nl', $nl);
             $a->bindParam(':nc', $nc);
-            $name = $_SESSION['login'];
+            $idu = $tab['id_user'];
             $cle = $p;
             $nl = 0;
             $nc = 0;
@@ -68,7 +73,7 @@
         $sucess = imagepng($photo_cam, $p);
         $p = 'photos/'. $uiid . '.png'; 
         insertIntoDatabase($p);
-        echo $p;
+        //echo $p;
 }
 
 

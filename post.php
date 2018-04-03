@@ -1,12 +1,17 @@
+
 <?php
 session_start();
+
+
 if (!isset($_SESSION["filter"]))
     $_SESSION["filter"] = "none";
+
 if (!isset($_SESSION["login"]) || $_SESSION["login"] == "")
 {
     header('Location: index.php');
     exit;
 }
+
 include 'config/database.php';
 include 'functions/initdb.php';
 include 'functions/user_like.php';
@@ -27,7 +32,8 @@ try{
              $nb_comments = $line['nb_comments'];
             $log = $line['user_login'];
         }
-        $_SESSION['post'] = $idp;
+        $_SESSION['id_post'] = $idp;
+        
     }
     else if (isset($_GET['purl']))
     {
@@ -44,7 +50,8 @@ try{
             $nb_comments = $line['nb_comments'];
             $log = $line['user_login'];
         }
-        $_SESSION['post'] = $idp;
+        $_SESSION['id_post'] = $idp;
+      
     }
 }
 catch(PDOException $e) {
@@ -64,6 +71,7 @@ catch(PDOException $e) {
         <meta name="description" content="165c. uniques">
         <link rel="stylesheet" type="text/css" href="stylesheet/gallery.css" media="all"/>
         <link rel="stylesheet" type="text/css" href="stylesheet/post.css" media="all"/>
+        <script type="text/javascript" src="js/comments.js"></script>
 </head>
 
 <body>
@@ -87,7 +95,7 @@ include "functions/header.php";
         <div id="heart">
         <a href="script/like.php?post_id=<?php echo $idp?>&amp;b=2">
         <?php
-        $val = if_user_like($post_id, $_SESSION['login']);
+        $val = if_user_like($idp, $_SESSION['login']);
             if ($val >= 1)
                 echo "<img src=\"img/redlike.png\"></a>";
             else
@@ -95,7 +103,7 @@ include "functions/header.php";
         ?>
         </div>
         <?php
-            if (if_user_like($post_id, $_SESSION['login']) === 1)
+            if (if_user_like($idp, $_SESSION['login']) === 1)
                 echo "<p id=\"nb_likes_red\">";
             else
                 echo "<p id=\"nb_likes\">";
@@ -110,13 +118,14 @@ include "functions/header.php";
     </div>
 
 
-     <div class="comments">
-
-     <?php 
+     <div id= "com" class="comments">
+        <div id="texts">
+     <?php
         include "functions/initdb.php";
         try{
-            $req = $db->prepare("SELECT u.id_user, u.user_login, c.text, c.date_creation FROM comments c INNER JOIN users u ON c.id_user = u.id_user WHERE c.id_post = ? ORDER BY date_creation ASC");
-            if ($req->execute(array($post_id)) && $tab = $req->fetchAll())
+            
+            $req = $db->prepare("SELECT c.id_user, u.user_login, c.text, c.date_creation FROM comments c INNER JOIN users u ON c.id_user = u.id_user WHERE c.id_post = ? ORDER BY date_creation ASC");
+            if ($req->execute(array($idp)) && $tab = $req->fetchAll())
             {
                 $i = 0;
                 while ($tab[$i])
@@ -127,20 +136,23 @@ include "functions/header.php";
                     echo "</div>";
                     $i++;
                 }
+                echo "</div>";
             }
         }
                 catch(PDOException $e) {
                     echo "Impossible d'inserer le motif! L'erreur est : ".$e;
                 }
+                
         ?>
-        <form id= "form_com" action="script/saveComment.php" method="post">
+        
+        <div id= "form_com">
             <div id="write_com">
                 <div id="send">
-                <input id="sub" type="submit" value="Publish">
+                <input id="sub" type="submit" value="Publish" onClick="saveComment(<?php echo $_SESSION['id_post']?>);">
                 </div>
             <input id="valuecom" type="text" name="text" placeholder="Add a comment...">
             </div>
-        </form>
+        </div>
 </div>
 </div>
 </div>

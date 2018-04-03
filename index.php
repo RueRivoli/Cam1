@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['login'] = "";
+$_SESSION['id_post'] = 0;
 include 'config/setup.php';
 
 ?>

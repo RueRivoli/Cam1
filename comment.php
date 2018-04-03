@@ -1,25 +1,28 @@
 <?php
-
 session_start();
 
 function insertCom()
 {
-    include "../config/database.php";
-    include "../functions/initdb.php";
+    include "config/database.php";
+    include "functions/initdb.php";
     try {
+        
         $login = $_SESSION['login'];
+        
         $a = $db->prepare("SELECT id_user FROM users WHERE user_login = :user_login");
+       
         $a->bindParam(':user_login', $login);
         $a->execute();
+        
         $tab = $a->fetch();
         $id_user = $tab['id_user'];
-
+        
         $a = $db->prepare("INSERT INTO comments (id_post, id_user, text, date_creation) VALUES (:postid, :id_user, :txt, NOW())");
         $a->bindParam(':postid', $postid);
         $a->bindParam(':id_user', $id_user);
         $a->bindParam(':txt', $txt);
+        $postid = $_POST['idp'];
         $id_user = $tab['id_user'];
-        $postid = $_SESSION['id_post'];
         $txt = htmlspecialchars($_POST['text']);
         $a->execute();
         $update = $db->prepare("UPDATE post SET nb_comments = nb_comments + 1 WHERE id_post = ?");
@@ -36,11 +39,11 @@ function warn_for_comment()
     $login = $_SESSION['login'];
     $subject = "New message for you";
     $entete = "From: inscription@camagru.com";
-    include "../config/database.php";
-    include "../functions/initdb.php";
+    include "config/database.php";
+    include "functions/initdb.php";
 
     try {
-        $postid = $_SESSION['id_post'];
+        $postid = $_POST['idp'];
         $st = $db->prepare("SELECT id_user FROM post where id_post = ?");
         $st->execute(array($postid));
         $row = $st->fetch();
@@ -59,11 +62,8 @@ function warn_for_comment()
             $st->execute(array($id_user));
             $row2 = $st->fetch();
             $dest = $row2['email'];
-            
             $message = "Salut c'est Camagru,    
-
             Votre post a reçu un commentaire !
-
             En effet, "
             .$login." a réagi à votre photo : ".htmlspecialchars($_POST['text'])."\n"."
             A bientôt pour de nouvelles aventures.\n
@@ -77,9 +77,9 @@ function warn_for_comment()
     }
 }
 
+
 insertCom();
 warn_for_comment();
+echo $_SESSION['login'];
 
-header('Location: ../post.php?id='.$_SESSION['id_post']);
-exit;
 ?>

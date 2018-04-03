@@ -122,17 +122,17 @@ if ($nb === 0)
         $a->execute(array("10", $date, "ressources/prepared/urquart.jpg", "2", "0"));
 
         $a = $db->prepare("INSERT INTO comments (id_post, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
-        $a->execute(array("ressources/prepared/falcao1.jpg", "4", "Futur ballon d'or", "2017-03-24 17:45:12"));
-        $a->execute(array("ressources/prepared/cr7.jpg", "8", "T es nul", "2016-03-24 12:55:02"));
-        $a->execute(array("ressources/prepared/louis16.jpg", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/pau.jpg", "9", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/cr7.jpg", "4", "Beau goss", "2018-01-01 01:05:32"));
-        $a->execute(array("ressources/prepared/louis16.jpg", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "2", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "6", "Y en a marre ou est le painnnn???", "1989-07-01 01:05:32"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "5", "Vous nous prenez pour des imbeciles?", "2016-03-15 05:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "10", "Du calme", "2015-05-29 13:55:02"));
-        $a->execute(array("ressources/prepared/louis16b.jpg", "4", "ouaaii", "2018-01-01 01:05:32"));
+        $a->execute(array("3", "4", "Futur ballon d'or", "2017-03-24 17:45:12"));
+        $a->execute(array("5", "8", "T es nul", "2016-03-24 12:55:02"));
+        $a->execute(array("5", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
+        $a->execute(array("10", "9", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
+        $a->execute(array("10", "4", "Beau goss", "2018-01-01 01:05:32"));
+        $a->execute(array("11", "10", "Toi tu vas pas faire long feu !", "2016-03-15 05:55:02"));
+        $a->execute(array("15", "2", "Je suis pas la manque de pau ;D", "2015-05-29 13:55:02"));
+        $a->execute(array("15", "6", "Y en a marre ou est le painnnn???", "1989-07-01 01:05:32"));
+        $a->execute(array("15", "5", "Vous nous prenez pour des imbeciles?", "2016-03-15 05:55:02"));
+        $a->execute(array("15", "10", "Du calme", "2015-05-29 13:55:02"));
+        $a->execute(array("15", "4", "ouaaii", "2018-01-01 01:05:32"));
         }
     catch(PDOException $e) {
         echo "Impossible to insert the instances! The mistake is: ".$e;

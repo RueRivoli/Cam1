@@ -27,6 +27,7 @@ function insertCom()
         $a->execute();
         $update = $db->prepare("UPDATE post SET nb_comments = nb_comments + 1 WHERE id_post = ?");
         $update->execute(array($postid));
+
     }
     catch(PDOException $e) {
         echo "Impossible to insert the comment in the database! The mistake is : ".$e;
@@ -54,10 +55,9 @@ function warn_for_comment()
         $row = $st->fetch();
         $notif = $row['notif']; 
 
-      
         if ($notif == 1)
         {
-           
+
             $st = $db->prepare("SELECT email FROM users where id_user = ?");
             $st->execute(array($id_user));
             $row2 = $st->fetch();

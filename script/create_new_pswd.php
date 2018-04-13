@@ -28,31 +28,30 @@ function send_mail_for_change($login)
     $code = hash("whirlpool", rand());
     /*Find the id*/
     try{
-        $st = $db->prepare("SELECT id, email FROM users WHERE login = :log ");
-        if($st->execute(array(':log' => $login)) && $row = $st->fetch())
+        $st = $db->prepare("SELECT id_user, email FROM users WHERE user_login = :logi ");
+        if($st->execute(array(':logi' => $login)) && $row = $st->fetch())
         {
-            $id = $row['id'];
+            $id = $row['id_user'];
             $email = $row['email']; 
         }
     }
     catch(PDOException $e) {
         echo "Can't manage to select login! The mistake is : ".$e;
     }
-    if ($id && $email)
+    if (isset($id) && isset($email))
     {
-        
         $rand = genere_password(8);
         
         try{
             /*Update password*/
-            $st = $db->prepare("UPDATE users SET pswd = :new_psd WHERE id = :id ");
+            $st = $db->prepare("UPDATE users SET pswd = :new_psd WHERE id_user = :id ");
             $st->bindParam(':new_psd', $new_pswd);
             $st->bindParam(':id', $id);
             $new_pswd = hash("whirlpool", $rand);
             $st->execute();
     
             /*Update key of activity*/
-            $st = $db->prepare("UPDATE users SET cle = :new_cle WHERE id = :id");
+            $st = $db->prepare("UPDATE users SET cle = :new_cle WHERE id_user = :id");
             $st->bindParam(':new_cle', $new_cle);
             $st->bindParam(':id', $id);
             $new_cle = $code;
@@ -60,7 +59,7 @@ function send_mail_for_change($login)
         
      
             /*Update activity of the user*/
-            $st = $db->prepare("UPDATE users SET activity = :new_acti WHERE id = :id");
+            $st = $db->prepare("UPDATE users SET activity = :new_acti WHERE id_user = :id");
             $st->bindParam(':new_acti', $new_acti);
             $st->bindParam(':id', $id);
             $new_acti = 0;

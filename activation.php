@@ -8,7 +8,7 @@ include "config/database.php";
 include "functions/initdb.php";
 
 try{
-    $st = $db->prepare("SELECT cle,activity FROM users WHERE login = :login ");
+    $st = $db->prepare("SELECT cle,activity FROM users WHERE user_login = :login ");
     if($st->execute(array(':login' => $login)) && $row = $st->fetch())
     {
         $cleb = $row['cle'];	// On récupération de la clé
@@ -26,7 +26,7 @@ try{
         {
             // Si elles correspondent on active le compte !
             // La requête qui va passer notre champ actif de 0 à 1
-            $st = $db->prepare("UPDATE users SET activity = 1 WHERE login = :login ");
+            $st = $db->prepare("UPDATE users SET activity = 1 WHERE user_login = :login ");
             $st->bindParam(':login', $login);
             $login = htmlspecialchars($_GET['log']);
             $st->execute();

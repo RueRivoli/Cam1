@@ -12,7 +12,7 @@ if ($_POST['sub'] === 'Submit')
         include "../config/database.php";
         include "../functions/initdb.php";
         try{
-            $st = $db->prepare("SELECT login FROM users WHERE login = :login");
+            $st = $db->prepare("SELECT user_login FROM users WHERE user_login = :login");
             if($st->execute(array(':login' => htmlspecialchars($_POST['uname']))))
                 $nb_count=  $st->rowCount();
             if ($nb_count === 0)

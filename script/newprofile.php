@@ -140,6 +140,7 @@ function insert_new_psd($psd)
 {
     include "../config/database.php";
     include "../functions/initdb.php";
+    
     try {
         $a = $db->prepare("UPDATE users SET pswd= :psd WHERE user_login = :user_login");
         $a->bindParam(':psd', $pswd);
@@ -181,7 +182,7 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
             //exit;
         }
     }
-    if (set($_POST['lastpsd']))
+    if (set($_POST['lastpsd']) && set($_POST['newpsd1']) && set($_POST['newpsd2']))
     {
         if (correct_formula_psd(htmlspecialchars($_POST['lastpsd']), htmlspecialchars($_POST['newpsd1']), htmlspecialchars($_POST['newpsd2'])) === 0)
         {
@@ -233,7 +234,7 @@ if ($_SESSION['login'] && htmlspecialchars($_POST['submit']) === 'Submit')
         $_SESSION['error'] = "Activate your account in your mailbox"; 
         //exit;
     }
-    if (isset($_POST['lastpsd']) && isset($_POST['newpsd1']) && isset($_POST['newpsd2']))
+    if (set($_POST['lastpsd']) && set($_POST['newpsd1']) && set($_POST['newpsd2']))
         insert_new_psd(htmlspecialchars($_POST['newpsd1']));
   
     header('Location: ../yourprofile.php');

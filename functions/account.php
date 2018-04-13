@@ -26,7 +26,7 @@ function send_mail($p)
     include "initdb.php";
 
     try{
-        $a = $db->prepare("UPDATE users SET cle= :cle WHERE login = :login");
+        $a = $db->prepare("UPDATE users SET cle= :cle WHERE user_login = :login");
         $a->bindParam(':cle', $code);
         $a->bindParam(':login', $log);
         $code = hash("whirlpool", rand());
@@ -71,7 +71,7 @@ function create_account($p, $pw){
     include "../functions/initdb.php";
     try {
         
-        $a = $db->prepare("INSERT INTO users (login, email, pswd, cle, activity, notif) VALUES (:name, :value, :pswd, :cle, :activi, :notif)");
+        $a = $db->prepare("INSERT INTO users (user_login, email, pswd, cle, activity, notif) VALUES (:name, :value, :pswd, :cle, :activi, :notif)");
         $a->bindParam(':name', $name);
         $a->bindParam(':value', $value);
         $a->bindParam(':pswd', $pd);

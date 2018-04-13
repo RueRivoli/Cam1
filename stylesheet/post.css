@@ -1,6 +1,9 @@
 
-#square{
+body{
     background: linear-gradient(to right, gold 0%, #4286F4 100%);
+}
+#square{
+    /*background: linear-gradient(to right, gold 0%, #4286F4 100%);*/
     height:40%;
     width:40%;
     margin: auto;

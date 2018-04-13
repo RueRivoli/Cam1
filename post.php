@@ -159,6 +159,5 @@ include "functions/header.php";
 <footer>
 @fgallois 2018
 </footer>
-
 </body>
 </html>

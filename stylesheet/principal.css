@@ -1,5 +1,5 @@
 body{
-    font-family: 'Source code pro', Calibri, serif;
+    font-family: 'Jazz LET, fantasy';
     margin: 0px;
     padding: 0px;
     background-color: grey;
@@ -96,7 +96,6 @@ nav li:hover .submenu{
 .logo{
     /* background-image: url('../img/logocam.png');*/
     font-size : 16px;
-    font-family: 'Jazz LET, fantasy';
     color: white;
     width: 77vw;
 } 
@@ -194,7 +193,6 @@ input{
     background-color: #FFF;
     color:#4286f4;
     font-size: 3vh;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
 #upl {
@@ -205,7 +203,6 @@ input{
     /* background-color: purple; */
     font-size: 1vh;
     opacity: 0.5;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
 
 #sub_upl {
@@ -213,7 +210,6 @@ input{
     margin: 0px;
     height: 3vh;
     font-size: 1vh;
-    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     background-color: skyblue;;
 }
 

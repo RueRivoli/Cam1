@@ -1,23 +1,14 @@
-
-@font-face {
-    font-family: "billabong";
-    src: url('../ressources/font/Billabong.ttf');
-}
-
 body{
     /* font-family: 'Source code pro', Calibri, serif; */
     margin: 0px;
     padding: 0px;
+    font-family: Jazz LET, fantasy;
     /* background-color: grey; */
 }
-
-
-
 
 .logo{
     /* background-image: url('../img/logocam.png');*/
     font-size : 16px;
-    font-family: 'Jazz LET, fantasy';
     color: white;
     width: 77vw;
 }
@@ -64,7 +55,7 @@ body{
 .numbers{
     margin: auto;
 }
-)
+
 .login{
     white-space: nowrap;
     float: left;
@@ -176,8 +167,10 @@ body{
 }
 
 .comments{
-    overflow:scroll;
+    overflow-y:scroll;
+    scroll-behavior: smooth;
     margin-top: 10px;
+    max-height: 30vh;
     background-color:rgb(192, 255, 213);
 }
 
@@ -188,19 +181,19 @@ body{
     width: 80%;
     text-align: center;
     border-radius: 4px;
-    background-color: green;
+    background-color: #339933;
 }
 
 .author{
-    /* width: 8vw; */
     text-align: center;
     margin-top: 0.3vh;
+    padding: 0px;
     margin-left: 1vw;
-    border-radius: 16px;
-    background-color: #ff5050;
+    border-radius: 6px;
+    background-color: #ff3399;
     display: flex;
     margin: auto;
-    height: 5vh;
+    height: 2.8vh;
 }
 
 .foot2{
@@ -249,7 +242,7 @@ footer{
     margin-left: 2vw;
     height: 5vh;
     border: none;
-    /* background-color: rgb(192, 255, 213); */
+    background-color: rgb(192, 255, 213);
     font-weight: bold;
 }
 
@@ -261,7 +254,10 @@ footer{
 }
 
 .namelog{
-    margin:auto;
+    margin: auto;
+    width: 6vw;
+    height: 2vh;
+    border-radius: 8px;
 }
 
 h1{
@@ -296,6 +292,8 @@ h1{
 
 span{
     font-weight: bold;
+    font-family: Jazz LET, fantasy;
+    font-size: 2vh;
 }
 
 

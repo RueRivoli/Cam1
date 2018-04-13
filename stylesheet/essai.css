@@ -7,7 +7,6 @@ body{
     height: 23vh;
     width: 100%;
     background-color: #4286f4;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     display: flex;
     color: white;
     /* display: inline-block; */
